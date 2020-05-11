@@ -62,6 +62,7 @@ class ALARMCLOCK:
 
     def on_off_switch(self):
         if self.btn_on.state:
+            self.alarm.updateTime(None)
             if self.alarm.alarmTime.get() == '00:00':
                 messagebox.showinfo(title='Alarma', message='especifique una hora de alarma')
                 self.btn_on.onClick('ButtonPress-1')
