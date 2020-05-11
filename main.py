@@ -118,6 +118,7 @@ def runapp():
     Despertador.sysdate.updateDisplay()
     Despertador.sysdate.ledScreenSimulation()
     Despertador.selector.ledScreenSimulation()
+    print('esto quedo en el repositorio remoto')
     app.mainloop()
 
 
