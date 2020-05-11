@@ -1,0 +1,9 @@
+El modulo de traducción Translate produce errores en python v3.x
+(el problema se soluciona copiando el archivo queue.py (que se encuentra en python36/Lib/) en la carpeta compilada Lib)
+
+Después de compilar con cx-freeze o PyInstaller se deben copiar las carpetas de imagenes al directorio raíz
+
+comando para compilar con PyInstaller [ PyInstaller --windowed --onefile --icon:path myfile.py]
+
+convención para API nombreDato_typoDato eje. usuario_str
+
