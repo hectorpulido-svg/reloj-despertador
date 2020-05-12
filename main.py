@@ -7,7 +7,6 @@
 # para windows x64/86 bits usando WINDOWS MEDIA PLAYER
 #------------------------------------------------------
 from tkinter import Tk, PhotoImage, messagebox, StringVar
-import threading
 from modulos import SYSTEMCLOCK, ALARM, SYSDATE,CBUTTON, FILESELECTOR, PLAYER
 
 class ALARMCLOCK:
@@ -118,7 +117,6 @@ def runapp():
     Despertador.sysdate.updateDisplay()
     Despertador.sysdate.ledScreenSimulation()
     Despertador.selector.ledScreenSimulation()
-    print('esto quedo en el repositorio remoto')
     app.mainloop()
 
 
