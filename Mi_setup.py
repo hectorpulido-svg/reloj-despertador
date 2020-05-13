@@ -7,6 +7,8 @@ import distutils
     dentro de la carpeta que contiene el archivo .py a compilar
     ejecutar en la terminal como administrador el comando
     -- python Mi_setup.py build --
+
+    Después de compilar con cx-freeze o PyInstaller se deben copiar las carpetas de imagenes al directorio raíz
 '''
 
 os.environ['TCL_LIBRARY'] = 'C:\\Program Files\\Python36\\tcl\\tcl8.6'
