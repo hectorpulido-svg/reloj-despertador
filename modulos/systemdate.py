@@ -2,7 +2,6 @@
 
 from tkinter import Label, StringVar
 import time
-import threading
 
 # Diccionarios de traducción
 day = {'monday': 'lunes', 'tuesday': 'martes', 'wednesday': 'miercoles', 'thursday': 'jueves', 'friday': 'viernes', 'saturday': 'sábado', 'sunday': 'domingo'}

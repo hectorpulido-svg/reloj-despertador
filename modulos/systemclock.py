@@ -2,7 +2,6 @@
 
 from tkinter import LabelFrame, StringVar, Label, PhotoImage
 import time
-import threading
 #=====================================================
 
 class SYSTEMCLOCK:

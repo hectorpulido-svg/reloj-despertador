@@ -1,7 +1,6 @@
 # -*coding: utf-8 -*-
 
 from tkinter import Button, LabelFrame, StringVar, filedialog
-import threading
 
 
 class FILESELECTOR:
