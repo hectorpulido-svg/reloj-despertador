@@ -1,5 +1,10 @@
 __pycache__
-.vs
-.vscode
-clases_img
-diagramas
+.vs/
+.vscode/
+clases_img/
+diagramas/
+Entry_info
+info
+loadtest
+Mi_setup
+cronotest
