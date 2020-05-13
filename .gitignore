@@ -3,3 +3,7 @@ __pycache__
 .vscode
 clases_img
 diagramas
+Entry_info.txt
+info.txt
+loadtest.py
+Mi_setup.py
