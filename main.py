@@ -94,13 +94,14 @@ class ALARMCLOCK:
     def alarmOff(self):
         self.player.stop()
         self.time_over = False
+        self.master.after_cancel(self.t1)
         self.alarm.reset()
         self.selector.reset()
         self.player.reset()
 
     def wakeUp(self):
-        if self.time_over == True and self.btn_on.state == True:
-            self.master.after_cancel(self.t1)
+        self.play = (self.time_over and self.btn_on)
+        if self.play:
             self.player.play()
 
             
