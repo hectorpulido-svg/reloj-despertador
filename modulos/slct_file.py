@@ -21,7 +21,7 @@ class FILESELECTOR:
         self.text = text
         self.command = command
         self.currentSelection = StringVar() # la dirección del archivo de sonido(file full path)
-        self.currentSelection.set('  select sound/mp3')
+        self.currentSelection.set(' tono/mp3')
         self.newSelectionPath = StringVar()
         self.newSelectionPath.set('')
         self.selectorTitle = StringVar()
@@ -67,7 +67,7 @@ class FILESELECTOR:
 
     def reset(self):
         self.selectorTitle.set('Selección')
-        self.currentSelection.set('  select sound/mp3')
+        self.currentSelection.set(' tono/mp3')
         self.updateSelectorTitle()
         self.updateSelectorLabel()
         
