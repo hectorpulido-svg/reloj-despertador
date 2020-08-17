@@ -42,12 +42,6 @@ class CBUTTON(Frame):
         '''
             actualiza el estado del boton
         '''
-        # if self.state:
-        #     self.state = False
-        #     self.imagePath.set('.\\img\\' + self.btn_type + '\\BTN_OFF.png')
-        # else:
-        #     self.state = True
-        #     self.imagePath.set('.\\img\\' + self.btn_type + '\\BTN_ON.png')
         self.imagePath.set((self.swapImage)(self.state))
         self.state = self.swapState(self.state)
 
@@ -58,7 +52,7 @@ class CBUTTON(Frame):
         '''
             ejecuta la acción
             dada por la instancia de clase
-            en el parametro command
+            en el parametro command al soltar el click
         '''
         if self.command is not None:
             self.command()

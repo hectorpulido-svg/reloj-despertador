@@ -40,11 +40,11 @@ class ALARMCLOCK:
                 self.master, row=1, column=0, columnspan=2,
                 display_font={'font': 'Arial', 'size': 15, 'type': 'normal'}
                 )
-        self.btn_on = CBUTTON(
+        self.btn_power = CBUTTON(
                 self.master, row=2, column=0, btn_type="sliderButtons",
                 Ltext='On',
                 Rtext='Off',
-                command=self.on_off_switch
+                command=self.on_off
                 )
         self.btn_am_pm = CBUTTON(
             self.master, row=2, column=1, btn_type="grey",
@@ -59,12 +59,12 @@ class ALARMCLOCK:
         self.player = PLAYER()
         self.time_over = False
 
-    def on_off_switch(self):
-        if self.btn_on.state:
+    def on_off(self):
+        if self.btn_power.state:
             self.alarm.updateTime(None)
             if self.alarm.alarmTime.get() == '00:00':
                 messagebox.showinfo(title='Alarma', message='especifique una hora de alarma')
-                self.btn_on.onClick('ButtonPress-1')
+                self.btn_power.onClick('ButtonPress-1')
             else:
                 self.alarmOn()
         else:
@@ -100,7 +100,7 @@ class ALARMCLOCK:
         self.player.reset()
 
     def wakeUp(self):
-        self.play = (self.time_over and self.btn_on)
+        self.play = (self.time_over and self.btn_power)
         if self.play:
             self.player.play()
 
