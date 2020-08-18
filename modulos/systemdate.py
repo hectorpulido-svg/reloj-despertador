@@ -30,7 +30,7 @@ class SYSDATE(Label):
     '''
 
     def __init__(self, master, row, column, columnspan=1, display_font={}, textColor='white'):
-        super().__init__()
+        super().__init__(master)
         self.master = master
         self.row = row
         self.column = column

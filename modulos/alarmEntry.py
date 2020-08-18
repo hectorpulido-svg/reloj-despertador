@@ -43,7 +43,7 @@ class ALARM(LabelFrame):
     '''
 
     def __init__(self, master, row, column, textColor='white', display_font={}, text_font={}):
-        super().__init__()
+        super().__init__(master)
         self.master = master
         self.row = row
         self.column = column
@@ -92,24 +92,24 @@ class ALARM(LabelFrame):
             bd=0
         )
         self.display_meridian.grid(row=0, column=2, sticky='ne')
-        self.displayHours.display.bind('<KeyRelease>', self.updateTime)
-        self.displayMinuts.display.bind('<KeyRelease>', self.updateTime)
-        self.displayHours.display.bind('<KeyPress>', self.focusOnHours)
-        self.displayMinuts.display.bind('<KeyPress>', self.focusOnMinuts)
+        self.displayHours.bind('<KeyRelease>', self.updateTime)
+        self.displayMinuts.bind('<KeyRelease>', self.updateTime)
+        self.displayHours.bind('<KeyPress>', self.focusOnHours)
+        self.displayMinuts.bind('<KeyPress>', self.focusOnMinuts)
         self.am_pm_switcher = (lambda x: 'pm' if x=='am' else 'am')
 
     def updateTime(self, e):
-        self.alarmTime.set(self.displayHours.display.get() + ':' + self.displayMinuts.display.get())
+        self.alarmTime.set(self.displayHours.get() + ':' + self.displayMinuts.get())
 
     def focusOnHours(self, e):
         if e.keycode == 13:
-            self.displayMinuts.display.focus_set()
-            self.displayMinuts.display.select_range(0, 1)
+            self.displayMinuts.focus_set()
+            self.displayMinuts.select_range(0, 1)
 
     def focusOnMinuts(self, e):
         if e.keycode == 13:
-            self.displayHours.display.focus_set()
-            self.displayHours.display.select_range(0, 1)
+            self.displayHours.focus_set()
+            self.displayHours.select_range(0, 1)
     
     def am_pm(self):
         self._meridian.set(self.am_pm_switcher(self._meridian.get()))
@@ -126,8 +126,8 @@ class ALARM(LabelFrame):
         self.displayHours.reset()
         self.displayMinuts.reset()
         self.updateTime(None)
-        self.displayHours.display.focus_set()
-        self.displayHours.display.select_range(0, 1)
+        self.displayHours.focus_set()
+        self.displayHours.select_range(0, 1)
 
 
 
@@ -141,8 +141,8 @@ if __name__ == '__main__':
     app = Tk()
     app.config(bg='black')
     entry = ALARM(app, row=0, column=0, display_font={'font':'SF Digital Readout', 'size':30, 'type':'normal'}, text_font= {'font':'Arial', 'size':10, 'type':'normal'}, textColor = 'red')
-    entry.displayHours.display.focus_set()
-    entry.displayHours.display.select_adjust(1)
+    entry.displayHours.focus_set()
+    entry.displayHours.select_adjust(1)
     app.mainloop()
 else:
     '''

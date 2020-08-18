@@ -35,7 +35,7 @@ class SYSTEMCLOCK(LabelFrame):
     '''
 
     def __init__(self, master, row, column, display_font={}, text_font={}, textColor='white'):
-        super().__init__()
+        super().__init__(master)
         self.master = master
         self.row = row
         self.column = column

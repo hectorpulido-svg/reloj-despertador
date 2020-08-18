@@ -7,7 +7,7 @@ class CBUTTON(LabelFrame):
     '''
 
     def __init__(self, master, row, column, btn_type='sliderButtons', Ltext='true', Rtext='false', command=None):
-        super().__init__()
+        super().__init__(master)
         self.row = row
         self.column = column
         self.LT = Ltext

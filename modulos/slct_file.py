@@ -15,7 +15,7 @@ class FILESELECTOR(LabelFrame):
 
     '''
     def __init__(self, master, row, column, columnspan, text, command=None):
-        super().__init__()
+        super().__init__(master)
         self.master
         self.row = row
         self.column = column

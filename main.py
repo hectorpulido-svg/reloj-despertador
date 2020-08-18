@@ -9,10 +9,13 @@
 from tkinter import Tk, PhotoImage, messagebox, StringVar
 from modulos import SYSTEMCLOCK, ALARM, SYSDATE,CBUTTON, FILESELECTOR, PLAYER
 
-class ALARMCLOCK:
+class ALARMCLOCK(Frame):
 
-    def __init__(self, master):
+    def __init__(self, master, row=0, column=0):
+        super().__init__(master)
         self.master = master
+        self.row = row
+        self.column = column
         self.master.resizable(width=False, height=False)
         self.systemclock = SYSTEMCLOCK(self.master, row=0, column=0,
                             display_font={
@@ -58,6 +61,8 @@ class ALARMCLOCK:
                 )
         self.player = PLAYER()
         self.time_over = False
+
+        self.grid(row=self.row, column=self.column)
 
     def on_off(self):
         if self.btn_power.state:
@@ -112,8 +117,8 @@ def runapp():
     app.config(bg='black')
     app.title('Reloj Despertador')
     Despertador = ALARMCLOCK(app)
-    Despertador.alarm.displayHours.display.focus_set()
-    Despertador.alarm.displayHours.display.select_adjust(1)
+    Despertador.alarm.displayHours.focus_set()
+    Despertador.alarm.displayHours.select_adjust(1)
     Despertador.systemclock.tictac()
     Despertador.sysdate.updateDisplay()
     Despertador.sysdate.ledScreenSimulation()

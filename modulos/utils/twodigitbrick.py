@@ -4,7 +4,7 @@
 from tkinter import Tk, Frame, Entry, StringVar
 import winsound
 
-class TWODIGITBRICK(Frame):
+class TWODIGITBRICK(Entry):
     '''
         Entry de dos digitos.
 
@@ -21,7 +21,7 @@ class TWODIGITBRICK(Frame):
             update(): actuliza el color del texto y la tipografia
     '''
     def __init__(self, master, row=0, column=0, textColor='white', display_font={}):
-        super().__init__()
+        super().__init__(master)
         self.master = master
         self.row = row
         self.column = column
@@ -30,8 +30,9 @@ class TWODIGITBRICK(Frame):
         #******************** TWO DIGIT ENTRY *******************
         self.displayValue = StringVar()
         self.displayValue.set('00')
-        self.display = Entry(self.master, width=2)
-        self.display.config(
+        # self.display = Entry(self.master, width=2)
+        self.config(
+            width=2,
             font = (self.display_font['font'], self.display_font['size'], self.display_font['type']),
             textvariable=self.displayValue,
             fg=self.textColor,
@@ -40,9 +41,9 @@ class TWODIGITBRICK(Frame):
             justify='left',
             validate = 'key'
             )
-        self.display.grid(row=self.row, column=self.column)
+        self.grid(row=self.row, column=self.column)
         comando = self.register(self.__Validate), '%d', '%i', '%S'
-        self.display.config(validatecommand=comando)
+        self.config(validatecommand=comando)
     #########################################################
     #             VALIDA LA ENTRADA DE DIGITOS              #
     #########################################################
@@ -73,16 +74,16 @@ class TWODIGITBRICK(Frame):
         return valid
 
     def update(self):
-        self.display.config(font=(self.display_font['font'], self.display_font['size'], self.display_font['type']), fg=self.textColor)
+        self.config(font=(self.display_font['font'], self.display_font['size'], self.display_font['type']), fg=self.textColor)
 
     def reset(self):
-        self.display.icursor(0)
-        self.display.select_adjust(1)
-        for i, c in enumerate(range(0, len(self.display.get()))):
-            self.display.insert(i, '0')
-        self.display.delete(2, len(self.display.get()))
-        self.display.icursor(0)
-        self.display.select_range(0, 1)
+        self.icursor(0)
+        self.select_adjust(1)
+        for i, c in enumerate(range(0, len(self.get()))):
+            self.insert(i, '0')
+        self.delete(2, len(self.get()))
+        self.icursor(0)
+        self.select_range(0, 1)
 
 
 if __name__ == '__main__':
@@ -97,14 +98,14 @@ if __name__ == '__main__':
         test.textColor='green'
         test.display_font={'font':'Castellar', 'size':30, 'type':'normal'}
         test.update()
-        print(test.display.get())
+        print(test.get())
 
     btn = Button(app, text='reset', command=resetTest)
     btn1 = Button(app, text='update', command=updateTest)
     btn.grid(row=1, column=0)
     btn1.grid(row=2, column=0)
-    test.display.focus_set()
-    test.display.select_adjust(1)
+    test.focus_set()
+    test.select_adjust(1)
     app.mainloop()
 else:
     '''
