@@ -1,5 +1,4 @@
 from tkinter import StringVar
-import threading
 
 class LEDSS:
     '''

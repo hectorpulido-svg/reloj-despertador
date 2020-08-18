@@ -1,7 +1,7 @@
 # -*coding: utf-8 -*-
 from tkinter import Frame, LabelFrame, Label, PhotoImage, StringVar
 
-class CBUTTON(Frame):
+class CBUTTON(LabelFrame):
     '''
         Widget de clase Boton con texto en sus extremos depende de imagenes externas
     '''
@@ -16,22 +16,22 @@ class CBUTTON(Frame):
         self.Ltext = StringVar()
         self.command = command
         self.state = False
-        self.buttonGroup = LabelFrame(master)
-        self.buttonGroup.config(bg=master['bg'], padx=5, pady=5)
-        self.buttonGroup.grid(row=self.row, column=self.column)
+        # self = LabelFrame(master)
+        self.config(bg=master['bg'], padx=2, pady=5)
+        self.grid(row=self.row, column=self.column)
         self.btn_types = {"sliderButtons":"sliderButtons", "red":"red", 'grey': 'grey', 'clasicbuttons': 'clasicbuttons'}
         self.btn_type = self.btn_types[btn_type]
         self.imagePath = StringVar()
         self.imagePath.set('.\\img\\' + self.btn_type + '\\BTN_OFF.png')
-        self.button = Label(self.buttonGroup)
+        self.button = Label(self)
         self.button.config(cursor='hand2', bg=master['bg'])
         self.button.bind('<Button-1>', self.onClick)
         self.button.bind('<ButtonRelease-1>', self.onRelease)
         self.button.grid(row=1, column=1)
-        self.leftTextlabel = Label(self.buttonGroup)
+        self.leftTextlabel = Label(self)
         self.leftTextlabel.config(bg=master['bg'], fg='white')
         self.leftTextlabel.grid(row=1, column=0)
-        self.rightTextlabel = Label(self.buttonGroup)
+        self.rightTextlabel = Label(self)
         self.rightTextlabel.config(bg=master['bg'], fg='white')
         self.rightTextlabel.grid(row=1, column=2)
         self.updatebutton()

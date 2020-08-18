@@ -4,7 +4,7 @@ from tkinter import Button, LabelFrame, StringVar, filedialog
 import threading
 
 
-class FILESELECTOR:
+class FILESELECTOR(LabelFrame):
     '''
         Widget de clase Button que abre un filedialog y permite al usuario seleccionar un archivo.
         El nombre de archivo es utilizado como texto del botón.
@@ -15,6 +15,8 @@ class FILESELECTOR:
 
     '''
     def __init__(self, master, row, column, columnspan, text, command=None):
+        super().__init__()
+        self.master
         self.row = row
         self.column = column
         self.columnspan = columnspan
@@ -28,10 +30,10 @@ class FILESELECTOR:
         self.selectorTitle.set(self.text)
         self.currentSelectionName = StringVar() # el nombre del archivo de sonido sin extensión(file name)
         self.currentSelectionName.set(self.currentSelection.get())
-        self.frame = LabelFrame(master, text=self.selectorTitle.get(), labelanchor='n')
-        self.frame.grid(row=self.row, column=self.column, columnspan=self.columnspan)
-        self.frame.config(bg='black', fg='white', padx=len(self.currentSelection.get()))
-        self.btn = Button(self.frame, textvariable=self.currentSelection, width=14, command=self.fld)
+        # self = LabelFrame(master)
+        self.grid(row=self.row, column=self.column, columnspan=self.columnspan)
+        self.config(bg=self.master['bg'], text=self.selectorTitle.get(), labelanchor='n', fg='white', padx=len(self.currentSelection.get()))
+        self.btn = Button(self, textvariable=self.currentSelection, width=14, command=self.fld)
         self.btn.grid(row=0, column=0, ipadx=len(self.currentSelection.get()))
         self.btn.config(bg='red', fg='white')
         self.ledSS = ledSS.LEDSS(string=self.currentSelection.get())
@@ -60,7 +62,7 @@ class FILESELECTOR:
         self.btn.after(round(3000 / len(self.currentSelection.get())), self.ledScreenSimulation)
     
     def updateSelectorTitle(self):
-        self.frame.config(text=self.selectorTitle.get())
+        self.config(text=self.selectorTitle.get())
 
     def updateSelectorLabel(self):
         self.ledSS.update(self.currentSelection.get())

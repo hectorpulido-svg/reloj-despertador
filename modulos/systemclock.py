@@ -5,7 +5,7 @@ import time
 import threading
 #=====================================================
 
-class SYSTEMCLOCK:
+class SYSTEMCLOCK(LabelFrame):
     '''
         Display para la hora del sistema
 
@@ -35,27 +35,29 @@ class SYSTEMCLOCK:
     '''
 
     def __init__(self, master, row, column, display_font={}, text_font={}, textColor='white'):
-        self.__master = master
-        self.__row = row
-        self.__column = column
+        super().__init__()
+        self.master = master
+        self.row = row
+        self.column = column
         self.display_font = display_font
         self.text_font = text_font
         self.textColor = textColor
         self.currentTime = StringVar()
         #----------------- CLOCK GROUP -------------------
-        self.__clockFrame = LabelFrame(self.__master, text='Reloj')
-        self.__clockFrame.config(
+        # self = LabelFrame(self.master, text='Reloj')
+        self.config(
+            text='Reloj',
             fg=self.textColor,
-            bg = self.__master['bg'],
+            bg = self.master['bg'],
             pady=7,
             padx=4,
             bd=2,
             relief='ridge'
             )
         # realif styles --> flat, groove, raised, ridge, solid, or sunken
-        self.__clockFrame.grid(row=self.__row, column=self.__column)
+        self.grid(row=self.row, column=self.column)
         #----------------- CLOCK DISPLAY -------------------
-        self.__clockDisplay = Label(self.__clockFrame)
+        self.__clockDisplay = Label(self)
         self.__glass = PhotoImage(file='.\\img\\ui\\fondoDisplays.gif')
         self.__clockDisplay.config(
             textvariable = self.currentTime,
@@ -70,10 +72,10 @@ class SYSTEMCLOCK:
         #------------  AM/PM -----------
         self._meridian = StringVar()
         self._meridian.set(time.strftime('%p').lower())
-        self.__meridianDisplay = Label(self.__clockFrame)
+        self.__meridianDisplay = Label(self)
         self.__meridianDisplay.config(
             fg=self.textColor,
-            bg=self.__master['bg'],
+            bg=self.master['bg'],
             textvariable=self._meridian,
             pady=0,
             padx=0,
@@ -94,13 +96,13 @@ class SYSTEMCLOCK:
             )
 
         self._meridian.set(time.strftime('%p').lower())
-        self.__clockFrame.after(1000, self.tictac)
+        self.after(1000, self.tictac)
 
     def update(self):
         '''
             Actualiza el Display
         '''
-        self.__clockFrame.config(
+        self.config(
             font = (self.text_font['font'], self.text_font['size'], self.text_font['type']))
         self.__clockDisplay.config(
             font = (self.display_font['font'], self.display_font['size'], self.display_font['type']), fg = self.textColor)
@@ -116,7 +118,7 @@ if __name__ == '__main__':
     app = Tk()
     app.config(bg='black')
     systemclock = SYSTEMCLOCK(app, row=0, column=0, display_font={'font':'SF Digital Readout', 'size':30, 'type':'normal'}, text_font={'font': 'Arial', 'size': 10, 'type': 'normal'}, textColor = 'red')
-    systemclock.tictac(0)
+    systemclock.tictac()
     app.mainloop()
 else:
     '''
