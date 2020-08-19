@@ -6,7 +6,7 @@
 # Aplicación: Reloj Despertador Version 1.0
 # para windows x64/86 bits usando WINDOWS MEDIA PLAYER
 #------------------------------------------------------
-from tkinter import Tk, PhotoImage, messagebox, StringVar
+from tkinter import Tk, PhotoImage, messagebox, StringVar, Frame
 from modulos import SYSTEMCLOCK, ALARM, SYSDATE,CBUTTON, FILESELECTOR, PLAYER
 
 class ALARMCLOCK(Frame):
@@ -93,13 +93,13 @@ class ALARMCLOCK(Frame):
         elif ((self.systemclock.currentTime.get() == '12:00') and (self.systemclock._meridian.get() == 'am')):
             self.sysdate.updateDisplay()
 
-        self.t1 = self.master.after(1000, self.alarmOn)
+        self.t1 = self.after(1000, self.alarmOn)
         self.wakeUp()
         
     def alarmOff(self):
         self.player.stop()
         self.time_over = False
-        self.master.after_cancel(self.t1)
+        self.after_cancel(self.t1)
         self.alarm.reset()
         self.selector.reset()
         self.player.reset()

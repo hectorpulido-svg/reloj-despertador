@@ -51,7 +51,6 @@ class ALARM(LabelFrame):
         self.text_font = text_font
         self.textColor = textColor
         self.alarmTime = StringVar()
-        # self.frame = LabelFrame(self.master, text='Alarma')
         self.config(
             text='Alarma',
             bg = self.master['bg'],

@@ -30,7 +30,6 @@ class FILESELECTOR(LabelFrame):
         self.selectorTitle.set(self.text)
         self.currentSelectionName = StringVar() # el nombre del archivo de sonido sin extensión(file name)
         self.currentSelectionName.set(self.currentSelection.get())
-        # self = LabelFrame(master)
         self.grid(row=self.row, column=self.column, columnspan=self.columnspan)
         self.config(bg=self.master['bg'], text=self.selectorTitle.get(), labelanchor='n', fg='white', padx=len(self.currentSelection.get()))
         self.btn = Button(self, textvariable=self.currentSelection, width=14, command=self.fld)

@@ -1,7 +1,7 @@
 # -*coding: utf-8 -*-
 # =======================================================================
 #
-from tkinter import Tk, Frame, Entry, StringVar
+from tkinter import Tk, Entry, StringVar
 import winsound
 
 class TWODIGITBRICK(Entry):
@@ -30,7 +30,6 @@ class TWODIGITBRICK(Entry):
         #******************** TWO DIGIT ENTRY *******************
         self.displayValue = StringVar()
         self.displayValue.set('00')
-        # self.display = Entry(self.master, width=2)
         self.config(
             width=2,
             font = (self.display_font['font'], self.display_font['size'], self.display_font['type']),

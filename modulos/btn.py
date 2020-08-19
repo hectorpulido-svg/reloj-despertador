@@ -1,5 +1,5 @@
 # -*coding: utf-8 -*-
-from tkinter import Frame, LabelFrame, Label, PhotoImage, StringVar
+from tkinter import LabelFrame, Label, PhotoImage, StringVar
 
 class CBUTTON(LabelFrame):
     '''
@@ -16,7 +16,6 @@ class CBUTTON(LabelFrame):
         self.Ltext = StringVar()
         self.command = command
         self.state = False
-        # self = LabelFrame(master)
         self.config(bg=master['bg'], padx=2, pady=5)
         self.grid(row=self.row, column=self.column)
         self.btn_types = {"sliderButtons":"sliderButtons", "red":"red", 'grey': 'grey', 'clasicbuttons': 'clasicbuttons'}

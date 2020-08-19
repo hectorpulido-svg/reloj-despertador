@@ -44,7 +44,6 @@ class SYSTEMCLOCK(LabelFrame):
         self.textColor = textColor
         self.currentTime = StringVar()
         #----------------- CLOCK GROUP -------------------
-        # self = LabelFrame(self.master, text='Reloj')
         self.config(
             text='Reloj',
             fg=self.textColor,

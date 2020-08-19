@@ -39,7 +39,6 @@ class SYSDATE(Label):
         self.display_font = display_font
         self.textColor = textColor
         self.sisdate.set('')
-        # self = Label(self.master)
         self.config(
             font = (self.display_font['font'], self.display_font['size'], self.display_font['type']),
             textvariable = self.sisdate,
