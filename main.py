@@ -8,6 +8,10 @@
 #------------------------------------------------------
 from tkinter import Tk, PhotoImage, messagebox, StringVar, Frame
 from modulos import SYSTEMCLOCK, ALARM, SYSDATE,CBUTTON, FILESELECTOR, PLAYER
+import os
+import sys
+
+cd = os.path.sys.path[0]
 
 class ALARMCLOCK(Frame):
 
@@ -44,13 +48,13 @@ class ALARMCLOCK(Frame):
                 display_font={'font': 'Arial', 'size': 15, 'type': 'normal'}
                 )
         self.btn_power = CBUTTON(
-                self.master, row=2, column=0, btn_type="sliderButtons",
+                self.master, row=2, column=0,
                 Ltext='On',
                 Rtext='Off',
                 command=self.on_off
                 )
         self.btn_am_pm = CBUTTON(
-            self.master, row=2, column=1, btn_type="grey",
+            self.master, row=2, column=1,
             Ltext=(lambda x: 'pm' if x == 'am' else 'am')(self.systemclock._meridian.get()),
             Rtext=(lambda x: 'pm' if x == 'pm' else 'am')(self.systemclock._meridian.get()),
             command=self.alarm.am_pm
@@ -112,7 +116,8 @@ class ALARMCLOCK(Frame):
             
 def runapp():
     app = Tk()
-    i = PhotoImage('.\\img\\icon\\TimeAlarmclock.ico')
+    ipath = os.path.join(cd, 'img\\icon\\TimeAlarmclock.ico')
+    i = PhotoImage(ipath)
     app.iconbitmap(i)
     app.config(bg='black')
     app.title('Reloj Despertador')

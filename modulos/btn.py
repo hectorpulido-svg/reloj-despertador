@@ -1,12 +1,14 @@
 # -*coding: utf-8 -*-
 from tkinter import LabelFrame, Label, PhotoImage, StringVar
+import os
+import sys
 
 class CBUTTON(LabelFrame):
     '''
         Widget de clase Boton con texto en sus extremos depende de imagenes externas
     '''
 
-    def __init__(self, master, row, column, btn_type='sliderButtons', Ltext='true', Rtext='false', command=None):
+    def __init__(self, master, row, column, Ltext='true', Rtext='false', command=None):
         super().__init__(master)
         self.row = row
         self.column = column
@@ -18,10 +20,8 @@ class CBUTTON(LabelFrame):
         self.state = False
         self.config(bg=master['bg'], padx=2, pady=5)
         self.grid(row=self.row, column=self.column)
-        self.btn_types = {"sliderButtons":"sliderButtons", "red":"red", 'grey': 'grey', 'clasicbuttons': 'clasicbuttons'}
-        self.btn_type = self.btn_types[btn_type]
         self.imagePath = StringVar()
-        self.imagePath.set('.\\img\\' + self.btn_type + '\\BTN_OFF.png')
+        self.imagePath.set(btnoffimg)
         self.button = Label(self)
         self.button.config(cursor='hand2', bg=master['bg'])
         self.button.bind('<Button-1>', self.onClick)
@@ -35,7 +35,7 @@ class CBUTTON(LabelFrame):
         self.rightTextlabel.grid(row=1, column=2)
         self.updatebutton()
         self.swapState = (lambda x: (x==False))
-        self.swapImage = (lambda x: ('.\\img\\' + self.btn_type + '\\BTN_OFF.png') if x else ('.\\img\\' + self.btn_type + '\\BTN_ON.png'))
+        self.swapImage = (lambda x: (btnoffimg) if x else (btnonimg))
 
     def onClick(self, event):
         '''
@@ -45,7 +45,6 @@ class CBUTTON(LabelFrame):
         self.state = self.swapState(self.state)
 
         self.updatebutton()
-        # self.button.bind('<ButtonRelease-1>', self.onRelease)
 
     def onRelease(self, event):
         '''
@@ -76,7 +75,8 @@ if __name__ == '__main__':
     from tkinter import Tk
     app = Tk()
     app.config(bg='black')
-        
+    btnoffimg = '.\\img\\grey\\BTN_OFF.png'
+    btnonimg = '.\\img\\grey\\BTN_ON.png'
     test_btn = CBUTTON(app, row=0, column=0, command=None)
     test_btn.grid(columnspan=2)
     app.mainloop()
@@ -85,4 +85,7 @@ else:
     '''
         modulo btn.py
     '''
-    pass
+    cd = os.path.sys.path[0]
+    btnoffimg = os.path.join(cd, 'img\\grey\\BTN_OFF.png')
+    btnonimg = os.path.join(cd, 'img\\grey\\BTN_ON.png')
+    # pass

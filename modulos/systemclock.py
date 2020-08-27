@@ -2,7 +2,9 @@
 
 from tkinter import LabelFrame, StringVar, Label, PhotoImage
 import time
-import threading
+import os
+import sys
+
 #=====================================================
 
 class SYSTEMCLOCK(LabelFrame):
@@ -57,7 +59,7 @@ class SYSTEMCLOCK(LabelFrame):
         self.grid(row=self.row, column=self.column)
         #----------------- CLOCK DISPLAY -------------------
         self.__clockDisplay = Label(self)
-        self.__glass = PhotoImage(file='.\\img\\ui\\fondoDisplays.gif')
+        self.__glass = PhotoImage(file=fd)
         self.__clockDisplay.config(
             textvariable = self.currentTime,
             pady = 0,
@@ -116,6 +118,7 @@ if __name__ == '__main__':
     from tkinter import Tk
     app = Tk()
     app.config(bg='black')
+    fd = '.\\img\\ui\\fondoDisplays.gif'
     systemclock = SYSTEMCLOCK(app, row=0, column=0, display_font={'font':'SF Digital Readout', 'size':30, 'type':'normal'}, text_font={'font': 'Arial', 'size': 10, 'type': 'normal'}, textColor = 'red')
     systemclock.tictac()
     app.mainloop()
@@ -123,4 +126,6 @@ else:
     '''
         modulo systemclock.py
     '''
-    pass
+    cd = os.path.sys.path[0]
+    fd = os.path.join(cd, 'img\\ui\\fondoDisplays.gif')
+    # pass
