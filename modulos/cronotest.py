@@ -50,26 +50,26 @@ class CRONO(Frame):
             )
         self.separator.grid(row=0, column=1)
         self.displaySeconds = TWODIGITBRICK(self.cronoGroup, 0, 2, textColor=self.textColor, display_font=self.displayFontText)
-        self.displayMinuts.display.bind('<KeyRelease>', self.focusOnMinuts)
-        self.displaySeconds.display.bind('<KeyRelease>', self.focusOnSeconds)
+        self.displayMinuts.bind('<KeyRelease>', self.focusOnMinuts)
+        self.displaySeconds.bind('<KeyRelease>', self.focusOnSeconds)
 
     def focusOnMinuts(self, e):
         if e.keycode == 13:
-            self.displaySeconds.display.focus_set()
-            self.displaySeconds.display.select_range(0, 1)
+            self.displaySeconds.focus_set()
+            self.displaySeconds.select_range(0, 1)
 
     def focusOnSeconds(self, e):
         if e.keycode == 13:
-            self.displayMinuts.display.focus_set()
-            self.displayMinuts.display.select_range(0, 1)
+            self.displayMinuts.focus_set()
+            self.displayMinuts.select_range(0, 1)
     
     def startCountDown(self):
         if self.state:
-            if self.displayMinuts.display.get() == '00' and self.displaySeconds.display.get() == '00':
+            if self.displayMinuts.get() == '00' and self.displaySeconds.get() == '00':
                 pass
             else:
-                self.minuts.set(self.displayMinuts.display.get())
-                self.seconds.set(self.displaySeconds.display.get())
+                self.minuts.set(self.displayMinuts.get())
+                self.seconds.set(self.displaySeconds.get())
                 time.sleep(1)
                 self.countDown()
 
@@ -78,7 +78,7 @@ class CRONO(Frame):
             cuenta regresiva
         '''
         
-        if (int(self.displayMinuts.display.get()) > 0 or int(self.displaySeconds.display.get()) > 0) and self.state == False:
+        if (int(self.displayMinuts.get()) > 0 or int(self.displaySeconds.get()) > 0) and self.state == False:
             pass
         else:
             if int(self.seconds.get()) > 0:
@@ -86,17 +86,17 @@ class CRONO(Frame):
                 if len(self.seconds.get()) <= 1:
                     self.seconds.set('0' + self.seconds.get()[0])
 
-            elif int(self.displayMinuts.display.get()) > 0 and int(self.displaySeconds.display.get()) <= 0:
+            elif int(self.displayMinuts.get()) > 0 and int(self.displaySeconds.get()) <= 0:
                 self.minuts.set(int(self.minuts.get()) - 1)
                 self.seconds.set('59')
                 if len(self.minuts.get()) <= 1:
                     self.minuts.set('0' + self.minuts.get()[0])
 
 
-        if (int(self.displayMinuts.display.get()) <= 0 and int(self.displaySeconds.display.get()) <= 0) and self.state == True:
+        if (int(self.displayMinuts.get()) <= 0 and int(self.displaySeconds.get()) <= 0) and self.state == True:
             self.timeOver()
 
-        elif (int(self.displayMinuts.display.get()) > 0 or int(self.displaySeconds.display.get()) > 0) and self.state == True:
+        elif (int(self.displayMinuts.get()) > 0 or int(self.displaySeconds.get()) > 0) and self.state == True:
             self.after(1000, self.countDown)
 
         self.displaySeconds.displayValue.set(self.seconds.get())
@@ -105,7 +105,7 @@ class CRONO(Frame):
         self.displayMinuts.update()
 
     def timeOver(self):
-        if (int(self.displayMinuts.display.get()) <= 0 and int(self.displaySeconds.display.get()) <= 0) and self.state == False:
+        if (int(self.displayMinuts.get()) <= 0 and int(self.displaySeconds.get()) <= 0) and self.state == False:
             pass
         else:
             winsound.Beep(1500, 500)
@@ -127,8 +127,8 @@ if __name__ == '__main__':
         testcrono.state = testbutton.swapState(testcrono.state)
         testcrono.startCountDown()
 
-    testcrono.displayMinuts.display.focus_set()
-    testcrono.displayMinuts.display.select_adjust(1)
+    testcrono.displayMinuts.focus_set()
+    testcrono.displayMinuts.select_adjust(1)
     testbutton = CBUTTON(app, row=1, column=0, btn_type='grey', Ltext='start', Rtext='stop', command=start)
     app.mainloop()
 
