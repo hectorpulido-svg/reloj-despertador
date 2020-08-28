@@ -118,7 +118,8 @@ if __name__ == '__main__':
     from tkinter import Tk
     app = Tk()
     app.config(bg='black')
-    fd = '.\\img\\ui\\fondoDisplays.gif'
+    cd = os.curdir
+    fd = cd + '\\img\\ui\\fondoDisplays.gif'
     systemclock = SYSTEMCLOCK(app, row=0, column=0, display_font={'font':'SF Digital Readout', 'size':30, 'type':'normal'}, text_font={'font': 'Arial', 'size': 10, 'type': 'normal'}, textColor = 'red')
     systemclock.tictac()
     app.mainloop()
@@ -126,6 +127,6 @@ else:
     '''
         modulo systemclock.py
     '''
-    cd = os.path.sys.path[0]
+    cd = os.path.dirname(sys.argv[0])
     fd = os.path.join(cd, 'img\\ui\\fondoDisplays.gif')
     # pass

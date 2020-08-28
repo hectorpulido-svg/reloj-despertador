@@ -75,8 +75,9 @@ if __name__ == '__main__':
     from tkinter import Tk
     app = Tk()
     app.config(bg='black')
-    btnoffimg = '.\\img\\grey\\BTN_OFF.png'
-    btnonimg = '.\\img\\grey\\BTN_ON.png'
+    cd = os.curdir
+    btnoffimg = cd + '\\img\\grey\\BTN_OFF.png'
+    btnonimg = cd + '\\img\\grey\\BTN_ON.png'
     test_btn = CBUTTON(app, row=0, column=0, command=None)
     test_btn.grid(columnspan=2)
     app.mainloop()
@@ -85,7 +86,7 @@ else:
     '''
         modulo btn.py
     '''
-    cd = os.path.sys.path[0]
+    cd = os.path.dirname(sys.argv[0])
     btnoffimg = os.path.join(cd, 'img\\grey\\BTN_OFF.png')
     btnonimg = os.path.join(cd, 'img\\grey\\BTN_ON.png')
     # pass

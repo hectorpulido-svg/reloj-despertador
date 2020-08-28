@@ -116,8 +116,9 @@ class ALARMCLOCK(Frame):
             
 def runapp():
     app = Tk()
-    ipath = os.path.join(cd, 'img\\icon\\TimeAlarmclock.ico')
-    i = PhotoImage(ipath)
+    cd = os.path.dirname(sys.argv[0])
+    icon = os.path.join(cd, 'img\\icon\\TimeAlarmclock.ico')
+    i = PhotoImage(icon)
     app.iconbitmap(i)
     app.config(bg='black')
     app.title('Reloj Despertador')
