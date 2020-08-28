@@ -113,8 +113,9 @@ class CRONO(Frame):
 
 
 if __name__ == '__main__':
-    from btn import CBUTTON
-    from utils.twodigitbrick import TWODIGITBRICK
+    from tkinter import Button
+    from modulos import CBUTTON
+    from modulos.utils.twodigitbrick import TWODIGITBRICK
     app = Tk()
     app.config(bg='black')
     testcrono = CRONO(app, textColor='red', display_font={'font':'Arial', 'size':30, 'type':'normal'})
@@ -127,9 +128,15 @@ if __name__ == '__main__':
         testcrono.state = testbutton.swapState(testcrono.state)
         testcrono.startCountDown()
 
+    def reset():
+        testcrono.displayMinuts.reset()
+        testcrono.displaySeconds.reset()
+
     testcrono.displayMinuts.focus_set()
     testcrono.displayMinuts.select_adjust(1)
-    testbutton = CBUTTON(app, row=1, column=0, btn_type='grey', Ltext='start', Rtext='stop', command=start)
+    testbutton = CBUTTON(app, row=1, column=0, Ltext='start', Rtext='stop', command=start)
+    resetbutton = Button(app, text='reiniciar', command=reset)
+    resetbutton.grid(row=2, column=0)
     app.mainloop()
 
 else:
