@@ -44,7 +44,7 @@ class SYSDATE(Label):
             textvariable = self.sisdate,
             fg = self.textColor,
             bg = self.master['bg'],
-            padx = 10,
+            padx = 5,
             pady = 10
         )
         self.grid(row=self.row, column=self.column, columnspan=self.columnspan)
