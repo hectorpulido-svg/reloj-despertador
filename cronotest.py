@@ -78,6 +78,7 @@ class CRONO(Frame):
         self.displaySeconds.reset()
         self.displayMinuts.focus_set()
         self.displayMinuts.select_adjust(1)
+        print(self.displayMinuts.get(), self.displaySeconds.get())
     
     def startCountDown(self):
         if self.displayMinuts.get() == '00' and self.displaySeconds.get() == '00':

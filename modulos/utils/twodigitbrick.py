@@ -76,13 +76,16 @@ class TWODIGITBRICK(Entry):
         self.config(font=(self.display_font['font'], self.display_font['size'], self.display_font['type']), fg=self.textColor)
 
     def reset(self):
-        self.icursor(0)
-        self.select_adjust(1)
         for i, c in enumerate(range(0, len(self.get()))):
+            # self.icursor(i)
+            # self.select_adjust(1)
+            self.delete(i, i+1)
             self.insert(i, '0')
-        self.delete(2, len(self.get()))
+            # print(self.get(), len(self.get()))
+        # self.delete(2, 4)
         self.icursor(0)
         self.select_range(0, 1)
+        # print(self.get(), len(self.get()))
 
 
 if __name__ == '__main__':
