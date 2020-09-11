@@ -37,6 +37,7 @@ class CRONO(Frame):
         self.textColor = textColor
         self.displayFontText = display_font
         self.state = False
+        self.swapState = lambda x: x==False
         self.cronoGroup = LabelFrame(self.master, text='cronometro', labelanchor='n')
         self.cronoGroup.config(fg='white', bg=self.master['bg'], padx=15)
         self.cronoGroup.grid(row=self.row, column=self.column)
@@ -62,6 +63,21 @@ class CRONO(Frame):
         if e.keycode == 13:
             self.displayMinuts.focus_set()
             self.displayMinuts.select_range(0, 1)
+
+    def startStop(self):
+        self.state = self.swapState(self.state)
+
+        if self.state:
+            self.startCountDown()
+        else:
+            self.displayMinuts.reset()
+            self.displaySeconds.reset()
+
+    def reset(self):
+        self.displayMinuts.reset()
+        self.displaySeconds.reset()
+        self.displayMinuts.focus_set()
+        self.displayMinuts.select_adjust(1)
     
     def startCountDown(self):
         if self.state:
@@ -119,23 +135,28 @@ if __name__ == '__main__':
     app = Tk()
     app.config(bg='black')
     testcrono = CRONO(app, textColor='red', display_font={'font':'Arial', 'size':30, 'type':'normal'})
-    # swapState = (lambda x: (x==False))
-    def start():
-        # if testcrono.state == False:
-        #     testcrono.state = True
-        # else:
-        #     testcrono.state = False
-        testcrono.state = testbutton.swapState(testcrono.state)
-        testcrono.startCountDown()
 
-    def reset():
-        testcrono.displayMinuts.reset()
-        testcrono.displaySeconds.reset()
+    # def startStop():
+    #     testcrono.state = testbutton.swapState(testcrono.state)
+
+    #     if testcrono.state:
+    #         testcrono.startCountDown()
+    #     else:
+    #         testcrono.displayMinuts.reset()
+    #         testcrono.displaySeconds.reset()
+
+
+    # def reset():
+    #     testcrono.displayMinuts.reset()
+    #     testcrono.displaySeconds.reset()
+    #     testcrono.displayMinuts.focus_set()
+    #     testcrono.displayMinuts.select_adjust(1)
+
 
     testcrono.displayMinuts.focus_set()
     testcrono.displayMinuts.select_adjust(1)
-    testbutton = CBUTTON(app, row=1, column=0, Ltext='start', Rtext='stop', command=start)
-    resetbutton = Button(app, text='reiniciar', command=reset)
+    testbutton = CBUTTON(app, row=1, column=0, Ltext='start', Rtext='stop', command=testcrono.startStop)
+    resetbutton = Button(app, text='reiniciar', command=testcrono.reset)
     resetbutton.grid(row=2, column=0)
     app.mainloop()
 
