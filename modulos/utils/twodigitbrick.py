@@ -66,26 +66,27 @@ class TWODIGITBRICK(Entry):
         if valid:
             self.focus_displayof().icursor(indx)
             self.focus_displayof().select_range(indx, indx + 1)
+            self.displayValue.set(self.get())
         else:
             if indx >= 0:
                 winsound.Beep(1000, 500)
-
+        # print('Entrada :%s, Valor :%s, Indice :%s, Indx :%s' % (self.get(), self.displayValue.get(), indice, indx))
         return valid
 
     def update(self):
         self.config(font=(self.display_font['font'], self.display_font['size'], self.display_font['type']), fg=self.textColor)
 
     def reset(self):
+        self.focus_set()
         for i, c in enumerate(range(0, len(self.get()))):
-            # self.icursor(i)
-            # self.select_adjust(1)
-            self.delete(i, i+1)
             self.insert(i, '0')
-            # print(self.get(), len(self.get()))
-        # self.delete(2, 4)
-        self.icursor(0)
-        self.select_range(0, 1)
-        # print(self.get(), len(self.get()))
+        # print(self.get())
+        
+        self.delete(2, len(self.get()))
+        self.displayValue.set('00')
+        self.config(textvariable=self.displayValue)
+        self.focus_displayof().icursor(0)
+        self.focus_displayof().select_range(0, 1)
 
 
 if __name__ == '__main__':
