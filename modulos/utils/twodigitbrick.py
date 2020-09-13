@@ -75,18 +75,20 @@ class TWODIGITBRICK(Entry):
 
     def update(self):
         self.config(font=(self.display_font['font'], self.display_font['size'], self.display_font['type']), fg=self.textColor)
+        self.config(textvariable=self.displayValue)
 
     def reset(self):
-        self.focus_set()
-        for i, c in enumerate(range(0, len(self.get()))):
-            self.insert(i, '0')
-        # print(self.get())
+        for i, c in enumerate(range(0, len(self.focus_displayof().get()))):
+            self.focus_displayof().insert(i, '0')
+        print(self.focus_displayof().get())
         
-        self.delete(2, len(self.get()))
+        self.focus_displayof().delete(2, len(self.focus_displayof().get()))
         self.displayValue.set('00')
         self.config(textvariable=self.displayValue)
         self.focus_displayof().icursor(0)
         self.focus_displayof().select_range(0, 1)
+
+        print(self.focus_displayof().get())
 
 
 if __name__ == '__main__':
