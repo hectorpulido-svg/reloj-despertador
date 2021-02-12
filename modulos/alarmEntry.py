@@ -42,7 +42,9 @@ class ALARM(LabelFrame):
 
     '''
 
-    def __init__(self, master, row, column, textColor='white', display_font={}, text_font={}):
+    def __init__(self, master, row=0, column=0, display_font={
+        'font':'SF Digital Readout', 'size':30, 'type':'normal'}, text_font= {
+            'font':'Arial', 'size':10, 'type':'normal'}, textColor='red'):
         super().__init__(master)
         self.master = master
         self.row = row
@@ -101,12 +103,12 @@ class ALARM(LabelFrame):
         self.alarmTime.set(self.displayHours.get() + ':' + self.displayMinuts.get())
 
     def focusOnHours(self, e):
-        if e.keycode == 13:
+        if e.keysym == 'Return':
             self.displayMinuts.focus_set()
             self.displayMinuts.select_range(0, 1)
 
     def focusOnMinuts(self, e):
-        if e.keycode == 13:
+        if e.keysym == 'Return':
             self.displayHours.focus_set()
             self.displayHours.select_range(0, 1)
     
@@ -139,7 +141,7 @@ if __name__ == '__main__':
     from utils.twodigitbrick import TWODIGITBRICK
     app = Tk()
     app.config(bg='black')
-    entry = ALARM(app, row=0, column=0, display_font={'font':'SF Digital Readout', 'size':30, 'type':'normal'}, text_font= {'font':'Arial', 'size':10, 'type':'normal'}, textColor = 'red')
+    entry = ALARM(app)
     entry.displayHours.focus_set()
     entry.displayHours.select_adjust(1)
     app.mainloop()

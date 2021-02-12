@@ -2,7 +2,7 @@
 # =======================================================================
 #
 from tkinter import Tk, Entry, StringVar
-import winsound
+# import winsound
 
 class TWODIGITBRICK(Entry):
     '''
@@ -38,7 +38,8 @@ class TWODIGITBRICK(Entry):
             bg=self.master['bg'],
             bd=0,
             justify='left',
-            validate = 'key'
+            validate = 'key',
+            relief='flat'
             )
         self.grid(row=self.row, column=self.column)
         comando = self.register(self.__Validate), '%d', '%i', '%S'
@@ -69,7 +70,8 @@ class TWODIGITBRICK(Entry):
             self.displayValue.set(self.get())
         else:
             if indx >= 0:
-                winsound.Beep(1000, 500)
+                # winsound.Beep(1000, 500)
+                self.bell()
         # print('Entrada :%s, Valor :%s, Indice :%s, Indx :%s' % (self.get(), self.displayValue.get(), indice, indx))
         return valid
 

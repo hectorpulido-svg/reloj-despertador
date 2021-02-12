@@ -1,10 +1,11 @@
-#!user/bin/env python
-# -*coding: utf-8 -*-
+# -*- coding: utf-8 -*-
+#!user/bin/env python3
 #------------------------------------------------------
 # Autor: Hector Miguel Pulido Garcia
 # Python 3
 # Aplicación: Reloj Despertador Version 1.0
-# para windows x64/86 bits usando WINDOWS MEDIA PLAYER
+# para windows o linux x64/86 bits 
+# usando WINDOWS MEDIA PLAYER o PYGAME.MIXER_MUSIC
 #------------------------------------------------------
 from tkinter import Tk, PhotoImage, messagebox, StringVar, Frame
 from modulos import SYSTEMCLOCK, ALARM, SYSDATE,CBUTTON, FILESELECTOR, PLAYER
