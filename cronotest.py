@@ -74,7 +74,9 @@ class CRONO(Frame):
 
 
     def reset(self):
+        self.displaySeconds.focus_set()
         self.displaySeconds.reset()
+        self.displayMinuts.focus_set()
         self.displayMinuts.reset()
     
     def startCountDown(self):
@@ -116,6 +118,7 @@ class CRONO(Frame):
         self.displaySeconds.update()
         self.displayMinuts.displayValue.set(self.minuts.get())
         self.displayMinuts.update()
+        print(self.displayMinuts.get(), self.displaySeconds.get())
 
     def timeOver(self):
         if (int(self.displayMinuts.get()) <= 0 and int(self.displaySeconds.get()) <= 0) and self.state == False:
