@@ -82,7 +82,7 @@ class TWODIGITBRICK(Entry):
     def reset(self):
         for i, c in enumerate(range(0, len(self.focus_displayof().get()))):
             self.focus_displayof().insert(i, '0')
-        print(self.focus_displayof().get())
+        # print(self.focus_displayof().get())
         
         self.focus_displayof().delete(2, len(self.focus_displayof().get()))
         self.displayValue.set('00')
@@ -90,7 +90,7 @@ class TWODIGITBRICK(Entry):
         self.focus_displayof().icursor(0)
         self.focus_displayof().select_range(0, 1)
 
-        print(self.focus_displayof().get())
+        # print(self.focus_displayof().get())
 
 
 if __name__ == '__main__':

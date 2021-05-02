@@ -98,13 +98,13 @@ class ALARMCLOCK(Frame):
         elif ((self.systemclock.currentTime.get() == '12:00') and (self.systemclock._meridian.get() == 'am')):
             self.sysdate.updateDisplay()
 
-        self.t1 = self.after(1000, self.alarmOn)
+        self.timer = self.after(1000, self.alarmOn)
         self.wakeUp()
         
     def alarmOff(self):
         self.player.stop()
         self.time_over = False
-        self.after_cancel(self.t1)
+        self.after_cancel(self.timer)
         self.alarm.reset()
         self.selector.reset()
         self.player.reset()
