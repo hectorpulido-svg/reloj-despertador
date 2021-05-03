@@ -1,12 +1,12 @@
 # -*coding: utf-8 -*-
 # =======================================================================
 #
-from tkinter import Tk, Frame, LabelFrame, Label, StringVar
+from tkinter import Tk, LabelFrame, Label, StringVar
 import winsound
 import time
 
 
-class CRONO(Frame):
+class CRONO(LabelFrame):
     '''
         Cronometro con entradas para minutos y segundos.
 
@@ -27,7 +27,8 @@ class CRONO(Frame):
 
     def __init__(self, master, row=0, column=0, textColor='black', display_font={}):
 
-        super().__init__()
+        super().__init__(master)
+        self.master = master
         self.row = row
         self.column = column
         self.minuts = StringVar()
@@ -38,11 +39,16 @@ class CRONO(Frame):
         self.displayFontText = display_font
         self.state = False
         self.swapState = lambda x: x==False
-        self.cronoGroup = LabelFrame(self.master, text='cronometro', labelanchor='n')
-        self.cronoGroup.config(fg='white', bg=self.master['bg'], padx=15)
-        self.cronoGroup.grid(row=self.row, column=self.column)
-        self.displayMinuts = TWODIGITBRICK(self.cronoGroup, 0, 0, textColor=self.textColor, display_font=self.displayFontText)
-        self.separator = Label(self.cronoGroup)
+        self.config(
+            text='cronometro',
+            labelanchor='n',
+            fg='white',
+            bg=self.master['bg'],
+            padx=15
+            )
+        self.grid(row=self.row, column=self.column)
+        self.displayMinuts = TWODIGITBRICK(self, 0, 0, textColor=self.textColor, display_font=self.displayFontText)
+        self.separator = Label(self)
         self.separator.config(
             text=':',
             font = (self.displayFontText['font'], self.displayFontText['size'], self.displayFontText['type']),
@@ -50,7 +56,7 @@ class CRONO(Frame):
             bg = self.master['bg']
             )
         self.separator.grid(row=0, column=1)
-        self.displaySeconds = TWODIGITBRICK(self.cronoGroup, 0, 2, textColor=self.textColor, display_font=self.displayFontText)
+        self.displaySeconds = TWODIGITBRICK(self, 0, 2, textColor=self.textColor, display_font=self.displayFontText)
         self.displayMinuts.bind('<KeyRelease>', self.focusOnMinuts)
         self.displaySeconds.bind('<KeyRelease>', self.focusOnSeconds)
 
