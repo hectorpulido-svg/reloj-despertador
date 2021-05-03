@@ -25,7 +25,9 @@ class CRONO(LabelFrame):
             startCountDown(): inicia cuenta regresiva.
     '''
 
-    def __init__(self, master, row=0, column=0, textColor='black', display_font={}):
+    def __init__(self, master, row=0, column=0, display_font={
+        'font':'SF Digital Readout', 'size':30, 'type':'normal'}, text_font= {
+            'font':'Arial', 'size':10, 'type':'normal'}, textColor='red'):
 
         super().__init__(master)
         self.master = master
@@ -36,7 +38,8 @@ class CRONO(LabelFrame):
         self.minuts.set('00')
         self.seconds.set('00')
         self.textColor = textColor
-        self.displayFontText = display_font
+        self.display_font = display_font
+        self.text_font = text_font
         self.state = False
         self.swapState = lambda x: x==False
         self.config(
@@ -44,19 +47,20 @@ class CRONO(LabelFrame):
             labelanchor='n',
             fg='white',
             bg=self.master['bg'],
-            padx=15
+            padx=15,
+            font = self.text_font
             )
         self.grid(row=self.row, column=self.column)
-        self.displayMinuts = TWODIGITBRICK(self, 0, 0, textColor=self.textColor, display_font=self.displayFontText)
+        self.displayMinuts = TWODIGITBRICK(self, 0, 0, textColor=self.textColor, display_font=self.display_font)
         self.separator = Label(self)
         self.separator.config(
             text=':',
-            font = (self.displayFontText['font'], self.displayFontText['size'], self.displayFontText['type']),
+            font = (self.display_font['font'], self.display_font['size'], self.display_font['type']),
             fg =self.textColor,
             bg = self.master['bg']
             )
         self.separator.grid(row=0, column=1)
-        self.displaySeconds = TWODIGITBRICK(self, 0, 2, textColor=self.textColor, display_font=self.displayFontText)
+        self.displaySeconds = TWODIGITBRICK(self, 0, 2, textColor=self.textColor, display_font=self.display_font)
         self.displayMinuts.bind('<KeyRelease>', self.focusOnMinuts)
         self.displaySeconds.bind('<KeyRelease>', self.focusOnSeconds)
 
@@ -140,7 +144,7 @@ if __name__ == '__main__':
     from modulos.utils.twodigitbrick import TWODIGITBRICK
     app = Tk()
     app.config(bg='black')
-    testcrono = CRONO(app, textColor='red', display_font={'font':'Arial', 'size':30, 'type':'normal'})
+    testcrono = CRONO(app)
     testcrono.displayMinuts.focus_set()
     testcrono.displayMinuts.select_adjust(1)
     testbutton = CBUTTON(app, row=1, column=0, Ltext='start', Rtext='stop', command=testcrono.startStop)
