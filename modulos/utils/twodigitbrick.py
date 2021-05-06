@@ -65,8 +65,8 @@ class TWODIGITBRICK(Entry):
                 indx = 0
         valid = insertaEste.isdigit()
         if valid:
-            self.focus_displayof().icursor(indx)
-            self.focus_displayof().select_range(indx, indx + 1)
+            self.icursor(indx)
+            self.select_range(indx, indx + 1)
             self.displayValue.set(self.get())
         else:
             if indx >= 0:
@@ -80,17 +80,18 @@ class TWODIGITBRICK(Entry):
         self.config(textvariable=self.displayValue)
 
     def reset(self):
-        for i, c in enumerate(range(0, len(self.focus_displayof().get()))):
-            self.focus_displayof().insert(i, '0')
-        # print(self.focus_displayof().get())
+        for i, c in enumerate(self.get()):
+            # print(len(self.get()))
+            self.insert(i, '0')
+            self.delete(2, len(self.get()))
+            # print(self.get(), self.winfo_name(), self.winfo_class())
         
-        self.focus_displayof().delete(2, len(self.focus_displayof().get()))
-        self.displayValue.set('00')
+        # self.delete(2, len(self.get()))
+        # print(len(self.get()))
         self.config(textvariable=self.displayValue)
-        self.focus_displayof().icursor(0)
-        self.focus_displayof().select_range(0, 1)
-
-        # print(self.focus_displayof().get())
+        self.select_range(0, 1)
+        self.icursor(0)
+        self.select_range(0, 1)
 
 
 if __name__ == '__main__':

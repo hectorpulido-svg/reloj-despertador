@@ -84,10 +84,10 @@ class CRONO(LabelFrame):
 
 
     def reset(self):
-        self.displaySeconds.focus_set()
+        # self.displaySeconds.focus_set()
         self.displaySeconds.reset()
-        self.displayMinuts.focus_set()
         self.displayMinuts.reset()
+        self.displayMinuts.focus_set()
     
     def startCountDown(self):
         if self.displayMinuts.get() == '00' and self.displaySeconds.get() == '00':
@@ -148,7 +148,7 @@ if __name__ == '__main__':
     testcrono.displayMinuts.focus_set()
     testcrono.displayMinuts.select_adjust(1)
     # testbutton = CBUTTON(app, row=1, column=0, Ltext='start', Rtext='stop', command=testcrono.startStop)
-    startbutton = Button(app, text='start/stop', command=testcrono.startStop())
+    startbutton = Button(app, text='start/stop', command=testcrono.startStop)
     startbutton.grid(row=1, column=0)
     resetbutton = Button(app, text='reiniciar', command=testcrono.reset)
     resetbutton.grid(row=2, column=0)
