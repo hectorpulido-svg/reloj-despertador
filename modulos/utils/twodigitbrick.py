@@ -38,11 +38,11 @@ class TWODIGITBRICK(Entry):
             bg=self.master['bg'],
             bd=0,
             justify='left',
-            validate = 'key',
+            validate = 'all',
             relief='flat'
             )
         self.grid(row=self.row, column=self.column)
-        comando = self.register(self.__Validate), '%d', '%i', '%S'
+        comando = self.register(self.__Validate), '%d', '%i', '%S', '%s'
         self.config(validatecommand=comando)
     #########################################################
     #             VALIDA LA ENTRADA DE DIGITOS              #
@@ -55,10 +55,11 @@ class TWODIGITBRICK(Entry):
     # %S = el caracter a ser insertado o borrado si lo hay
     # %v = el tipo de validación asignada
     # %V = el tipo de validación que dispara la llamada
-    #      (key, focusin, focusout, forced)
+    #      (all, key, focusin, focusout, forced)
     # %W = el nombre del widget
 
-    def __Validate(self, codigo, indice, insertaEste):
+    def __Validate(self, codigo, indice, insertaEste, valorEntrada):
+        self.bind('<KeyRelease>', self.testKey)
         indx = int(indice)
         if codigo == '1':
             if indx >= 1:
@@ -67,29 +68,35 @@ class TWODIGITBRICK(Entry):
         if valid:
             self.icursor(indx)
             self.select_range(indx, indx + 1)
+            print(codigo, indice, insertaEste, valorEntrada)
             self.displayValue.set(self.get())
         else:
-            if indx >= 0:
-                # winsound.Beep(1000, 500)
+            if codigo == '-1':
+                pass
+            elif codigo == '0':
+                self.index(indx - 1)
+            else:
                 self.bell()
-        # print('Entrada :%s, Valor :%s, Indice :%s, Indx :%s' % (self.get(), self.displayValue.get(), indice, indx))
+            print(codigo, indice, insertaEste)
+                
         return valid
 
+    def testKey(self, e):
+        print(e)
+
     def update(self):
-        self.config(font=(self.display_font['font'], self.display_font['size'], self.display_font['type']), fg=self.textColor)
-        self.config(textvariable=self.displayValue)
+        # self.config(font=(self.display_font['font'], self.display_font['size'], self.display_font['type']), fg=self.textColor)
+        self.config(width=2, textvariable=self.displayValue)
 
     def reset(self):
         for i, c in enumerate(self.get()):
-            # print(len(self.get()))
-            self.insert(i, '0')
-            self.delete(2, len(self.get()))
-            # print(self.get(), self.winfo_name(), self.winfo_class())
+            self.icursor(0)
+            self.select_range(0, 1)
+            self.insert(0, '0')
+            self.delete(2)
         
-        # self.delete(2, len(self.get()))
-        # print(len(self.get()))
-        self.config(textvariable=self.displayValue)
-        self.select_range(0, 1)
+        self.displayValue.set('00')
+        self.update()
         self.icursor(0)
         self.select_range(0, 1)
 
@@ -106,7 +113,6 @@ if __name__ == '__main__':
         test.textColor='green'
         test.display_font={'font':'Castellar', 'size':30, 'type':'normal'}
         test.update()
-        print(test.get())
 
     btn = Button(app, text='reset', command=resetTest)
     btn1 = Button(app, text='update', command=updateTest)
