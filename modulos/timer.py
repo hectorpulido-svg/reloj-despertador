@@ -47,7 +47,6 @@ class CRONO(LabelFrame):
             font = self.text_font
             )
         self.grid(row=self.row, column=self.column)
-        self.displayMinuts = TWODIGITBRICK(self, 0, 0, textColor=self.textColor, display_font=self.display_font)
         self.separator = Label(self)
         self.separator.config(
             text=':',
@@ -56,6 +55,10 @@ class CRONO(LabelFrame):
             bg = self.master['bg']
             )
         self.separator.grid(row=0, column=1)
+        self.createDisplays()
+
+    def createDisplays(self):
+        self.displayMinuts = TWODIGITBRICK(self, 0, 0, textColor=self.textColor, display_font=self.display_font)
         self.displaySeconds = TWODIGITBRICK(self, 0, 2, textColor=self.textColor, display_font=self.display_font)
         self.displayMinuts.bind('<KeyRelease>', self.focusOnMinuts)
         self.displaySeconds.bind('<KeyRelease>', self.focusOnSeconds)
@@ -80,9 +83,9 @@ class CRONO(LabelFrame):
 
 
     def reset(self):
-        self.displaySeconds.reset()
-        self.displayMinuts.reset()
-        print(len(self.displayMinuts.get()), len(self.displaySeconds.get()))
+        self.displayMinuts.destroy()
+        self.displaySeconds.destroy()
+        self.createDisplays()
         self.displayMinuts.focus_set()
         self.displayMinuts.icursor(0)
         self.displayMinuts.select_range(0, 1)
@@ -105,13 +108,13 @@ class CRONO(LabelFrame):
             if int(self.displaySeconds.get()) > 0:
                 self.displaySeconds.displayValue.set(int(self.displaySeconds.get()) - 1)
                 if len(self.displaySeconds.displayValue.get()) <= 1:
-                    self.displaySeconds.displayValue.set('0' + self.displaySeconds.displayValue.get()[0])
+                    self.displaySeconds.displayValue.set('0' + str(int(self.displaySeconds.displayValue.get())))
 
-            elif int(self.displayMinuts.get()) > 0 and int(self.displaySeconds.get()) <= 0:
+            if int(self.displayMinuts.get()) > 0 and int(self.displaySeconds.get()) <= 0:
                 self.displayMinuts.displayValue.set(int(self.displayMinuts.get()) - 1)
-                self.displaySeconds.displayValue.set('59')
                 if len(self.displayMinuts.displayValue.get()) <= 1:
-                    self.displayMinuts.displayValue.set('0' + self.displayMinuts.displayValue.get()[0])
+                    self.displayMinuts.displayValue.set('0' + str(int(self.displayMinuts.displayValue.get())))
+                self.displaySeconds.displayValue.set('59')
 
 
         if (int(self.displayMinuts.get()) <= 0 and int(self.displaySeconds.get()) <= 0) and self.state == True:
