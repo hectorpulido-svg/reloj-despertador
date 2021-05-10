@@ -106,14 +106,14 @@ class CRONO(LabelFrame):
             pass
         else:
             if int(self.displaySeconds.get()) > 0:
-                self.displaySeconds.displayValue.set(int(self.displaySeconds.get()) - 1)
-                if len(self.displaySeconds.displayValue.get()) <= 1:
-                    self.displaySeconds.displayValue.set('0' + str(int(self.displaySeconds.displayValue.get())))
+                self.displaySeconds.displayValue.set(str(int(self.displaySeconds.displayValue.get()) - 1))
+                if len(self.displaySeconds.get()) <= 1:
+                    self.displaySeconds.displayValue.set('0' + self.displaySeconds.get())
 
             if int(self.displayMinuts.get()) > 0 and int(self.displaySeconds.get()) <= 0:
-                self.displayMinuts.displayValue.set(int(self.displayMinuts.get()) - 1)
-                if len(self.displayMinuts.displayValue.get()) <= 1:
-                    self.displayMinuts.displayValue.set('0' + str(int(self.displayMinuts.displayValue.get())))
+                self.displayMinuts.displayValue.set(str(int(self.displayMinuts.displayValue.get()) - 1))
+                if len(self.displayMinuts.get()) <= 1:
+                    self.displayMinuts.displayValue.set('0' + self.displayMinuts.get())
                 self.displaySeconds.displayValue.set('59')
 
 

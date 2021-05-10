@@ -70,9 +70,9 @@ class TWODIGITBRICK(Entry):
                 indx = 0
 
         if self.valid:
-            self.focus_displayof().icursor(indx)
-            self.focus_displayof().select_range(indx, indx + 1)
-            self.focus_displayof().displayValue.set(self.focus_displayof().get())
+            self.icursor(indx)
+            self.select_range(indx, indx + 1)
+            self.displayValue.set(self.get())
         else:
             if int(codigo) <= 0:
                 pass
@@ -88,14 +88,14 @@ class TWODIGITBRICK(Entry):
 
     def reset(self):
         for i, c in enumerate(self.get()):
-            self.focus_displayof().icursor(0)
-            self.focus_displayof().select_range(0, 1)
-            self.focus_displayof().insert(0, '0')
-            self.focus_displayof().delete(2, len(self.focus_displayof().get()))
+            self.icursor(0)
+            self.select_range(0, 1)
+            self.insert(0, '0')
+            self.delete(2, len(self.get()))
 
-        self.displayValue.set(self.focus_displayof().get())
-        self.focus_displayof().icursor(0)
-        self.focus_displayof().select_range(0, 1)
+        self.displayValue.set(self.get())
+        self.icursor(0)
+        self.select_range(0, 1)
 
 
 if __name__ == '__main__':
