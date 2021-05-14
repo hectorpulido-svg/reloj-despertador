@@ -12,7 +12,7 @@ from modulos import SYSTEMCLOCK, ALARM, SYSDATE,CBUTTON, FILESELECTOR, PLAYER
 import os
 import sys
 
-cd = os.path.sys.path[0]
+# cd = os.path.sys.path[0]
 
 class ALARMCLOCK(Frame):
 
@@ -98,13 +98,13 @@ class ALARMCLOCK(Frame):
         elif ((self.systemclock.currentTime.get() == '12:00') and (self.systemclock._meridian.get() == 'am')):
             self.sysdate.updateDisplay()
 
-        self.timer = self.after(1000, self.alarmOn)
+        self.checker = self.after(1000, self.alarmOn)
         self.wakeUp()
         
     def alarmOff(self):
         self.player.stop()
         self.time_over = False
-        self.after_cancel(self.timer)
+        self.after_cancel(self.checker)
         self.alarm.reset()
         self.selector.reset()
         self.player.reset()

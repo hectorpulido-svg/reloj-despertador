@@ -1,5 +1,5 @@
 # -*coding: utf-8 -*-
-from tkinter import LabelFrame, Label, Entry, StringVar
+from tkinter import LabelFrame, Label, StringVar
 import time
 
 
@@ -93,8 +93,8 @@ class ALARM(LabelFrame):
             bd=0
         )
         self.display_meridian.grid(row=0, column=2, sticky='ne')
-        self.displayHours.bind('<KeyRelease>', self.updateTime)
-        self.displayMinuts.bind('<KeyRelease>', self.updateTime)
+        # self.displayHours.bind('<KeyRelease>', self.updateTime)
+        # self.displayMinuts.bind('<KeyRelease>', self.updateTime)
         self.displayHours.bind('<KeyPress>', self.focusOnHours)
         self.displayMinuts.bind('<KeyPress>', self.focusOnMinuts)
         self.am_pm_switcher = (lambda x: 'pm' if x=='am' else 'am')
@@ -126,7 +126,7 @@ class ALARM(LabelFrame):
     def reset(self):
         self.displayHours.reset()
         self.displayMinuts.reset()
-        self.updateTime(None)
+        # self.updateTime(None)
         self.displayHours.focus_set()
         self.displayHours.select_range(0, 1)
 

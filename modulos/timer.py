@@ -1,14 +1,14 @@
 # -*coding: utf-8 -*-
 # =======================================================================
 #
-from tkinter import Tk, LabelFrame, Label, StringVar
+from tkinter import Tk, LabelFrame, Label
 import winsound
 import time
 
 
-class CRONO(LabelFrame):
+class TIMER(LabelFrame):
     '''
-        Cronometro con entradas para minutos y segundos.
+        Temporizador con entradas para minutos y segundos.
 
         args, kwrds:
 
@@ -37,16 +37,20 @@ class CRONO(LabelFrame):
         self.display_font = display_font
         self.text_font = text_font
         self.state = False
+        self.tcd = None
+        self.stop_beep = None
         self.swapState = lambda x: x==False
         self.config(
             text='temporizador',
-            labelanchor='n',
-            fg='white',
+            fg=self.textColor,
             bg=self.master['bg'],
-            padx=15,
-            font = self.text_font
+            pady=18,
+            padx=5,
+            bd=2,
+            relief='ridge'
             )
         self.grid(row=self.row, column=self.column)
+        self.displayMinuts = TWODIGITBRICK(self, 1, 0, textColor=self.textColor, display_font=self.display_font)
         self.separator = Label(self)
         self.separator.config(
             text=':',
@@ -54,12 +58,8 @@ class CRONO(LabelFrame):
             fg =self.textColor,
             bg = self.master['bg']
             )
-        self.separator.grid(row=0, column=1)
-        self.createDisplays()
-
-    def createDisplays(self):
-        self.displayMinuts = TWODIGITBRICK(self, 0, 0, textColor=self.textColor, display_font=self.display_font)
-        self.displaySeconds = TWODIGITBRICK(self, 0, 2, textColor=self.textColor, display_font=self.display_font)
+        self.separator.grid(row=1, column=1)
+        self.displaySeconds = TWODIGITBRICK(self, 1, 2, textColor=self.textColor, display_font=self.display_font)
         self.displayMinuts.bind('<KeyRelease>', self.focusOnMinuts)
         self.displaySeconds.bind('<KeyRelease>', self.focusOnSeconds)
 
@@ -79,13 +79,15 @@ class CRONO(LabelFrame):
         if self.state:
             self.startCountDown()
         else:
-            self.after_cancel(self.tcd)
+            if self.tcd is not None:
+                self.after_cancel(self.tcd)
+            if self.stop_beep is not None:
+                self.after_cancel(self.stop_beep)
 
 
     def reset(self):
-        self.displayMinuts.destroy()
-        self.displaySeconds.destroy()
-        self.createDisplays()
+        self.displayMinuts.reset()
+        self.displaySeconds.reset()
         self.displayMinuts.focus_set()
         self.displayMinuts.icursor(0)
         self.displayMinuts.select_range(0, 1)
@@ -101,38 +103,32 @@ class CRONO(LabelFrame):
         '''
             cuenta regresiva
         '''
-        
-        if (int(self.displayMinuts.get()) > 0 or int(self.displaySeconds.get()) > 0) and self.state == False:
-            pass
-        else:
+        self.displayMinuts.delete(2, len(self.displayMinuts.get()))
+        self.displaySeconds.delete(2, len(self.displaySeconds.get()))
+        if self.state:
             if int(self.displaySeconds.get()) > 0:
                 self.displaySeconds.displayValue.set(str(int(self.displaySeconds.displayValue.get()) - 1))
                 if len(self.displaySeconds.get()) <= 1:
                     self.displaySeconds.displayValue.set('0' + self.displaySeconds.get())
-
-            if int(self.displayMinuts.get()) > 0 and int(self.displaySeconds.get()) <= 0:
-                self.displayMinuts.displayValue.set(str(int(self.displayMinuts.displayValue.get()) - 1))
-                if len(self.displayMinuts.get()) <= 1:
-                    self.displayMinuts.displayValue.set('0' + self.displayMinuts.get())
+            elif int(self.displaySeconds.get()) == 0:
                 self.displaySeconds.displayValue.set('59')
 
+                if int(self.displayMinuts.get()) > 0:
+                    self.displayMinuts.displayValue.set(str(int(self.displayMinuts.displayValue.get()) - 1))
+                    if len(self.displayMinuts.get()) <= 1:
+                        self.displayMinuts.displayValue.set('0' + self.displayMinuts.get())
 
-        if (int(self.displayMinuts.get()) <= 0 and int(self.displaySeconds.get()) <= 0) and self.state == True:
+        if (int(self.displayMinuts.get()) <= 0 and int(self.displaySeconds.get()) <= 0) and self.state:
             self.timeOver()
 
-        elif (int(self.displayMinuts.get()) > 0 or int(self.displaySeconds.get()) > 0) and self.state == True:
+        elif (int(self.displayMinuts.get()) > 0 or int(self.displaySeconds.get()) > 0) and self.state:
             self.tcd = self.after(1000, self.countDown)
 
-        self.displaySeconds.update()
-        self.displayMinuts.update()
         print(self.displayMinuts.get(), self.displaySeconds.get())
 
     def timeOver(self):
-        if (int(self.displayMinuts.get()) <= 0 and int(self.displaySeconds.get()) <= 0) and self.state == False:
-            pass
-        else:
-            winsound.Beep(1500, 500)
-            self.after(1000, self.timeOver)
+        winsound.Beep(1500, 500)
+        self.stop_beep = self.after(1000, self.timeOver)
 
 
 if __name__ == '__main__':
@@ -140,7 +136,7 @@ if __name__ == '__main__':
     from utils.twodigitbrick import TWODIGITBRICK
     app = Tk()
     app.config(bg='black')
-    testcrono = CRONO(app)
+    testcrono = TIMER(app)
     testcrono.displayMinuts.focus_set()
     testcrono.displayMinuts.select_adjust(1)
     startbutton = Button(app, text='start/stop', command=testcrono.startStop)

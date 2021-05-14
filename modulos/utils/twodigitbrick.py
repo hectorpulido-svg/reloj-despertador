@@ -39,13 +39,12 @@ class TWODIGITBRICK(Entry):
             bg=self.master['bg'],
             bd=0,
             justify='right',
-            validate = 'all',
+            validate = 'key',
             relief='flat'
             )
         self.grid(row=self.row, column=self.column)
         command_key = self.register(self.__Validate), '%d', '%i', '%S', '%V'
         self.config(validatecommand=command_key)
-        self.valid = False
     #########################################################
     #             VALIDA LA ENTRADA DE DIGITOS              #
     #########################################################
@@ -61,42 +60,36 @@ class TWODIGITBRICK(Entry):
     # %W = el nombre del widget
 
     def __Validate(self, codigo, indice, caracter, validacionTipo):
-        # if validacionTipo == 'focusin' or validacionTipo == 'focusout':
-        #     self.displayValue.set(self.get()[0:2])
 
         indx = int(indice)
         if codigo == '1':
             if indx >= 1:
                 indx = 0
+        if int(indice) >= 1:
+            self.index(0)
+
+        self.valid = caracter.isdigit()
 
         if self.valid:
             self.icursor(indx)
             self.select_range(indx, indx + 1)
-            self.displayValue.set(self.get())
         else:
-            if int(codigo) <= 0:
-                pass
-            else:
+            if validacionTipo != 'forced':
                 self.bell()
-                
-        self.valid = caracter.isdigit()
+        print(validacionTipo)
         return self.valid
-
-    def update(self):
-        # self.config(font=(self.display_font['font'], self.display_font['size'], self.display_font['type']), fg=self.textColor)
-        self.config(textvariable=self.displayValue)
-
+                
     def reset(self):
-        for i, c in enumerate(self.get()):
-            self.icursor(0)
-            self.select_range(0, 1)
-            self.insert(0, '0')
-            self.delete(2, len(self.get()))
-
-        self.displayValue.set(self.get())
-        self.icursor(0)
-        self.select_range(0, 1)
-
+        # for i, c in enumerate(self.get()):
+            # self.icursor(0)
+            # self.select_range(0, 1)
+        self.delete(0, len(self.get()))
+        self.insert(0, '0')
+        self.insert(1, '0')
+            # self.delete(1, len(self.get()))
+            # self.index(0)
+        # self.icursor(0)
+        # self.select_range(0, 1)
 
 if __name__ == '__main__':
     from tkinter import Button
@@ -106,15 +99,8 @@ if __name__ == '__main__':
     def resetTest():
         test.reset()
 
-    def updateTest():
-        test.textColor='green'
-        test.display_font={'font':'Castellar', 'size':30, 'type':'normal'}
-        test.update()
-
     btn = Button(app, text='reset', command=resetTest)
-    btn1 = Button(app, text='update', command=updateTest)
     btn.grid(row=1, column=0)
-    btn1.grid(row=2, column=0)
     test.focus_set()
     test.select_adjust(1)
     app.mainloop()
