@@ -38,12 +38,12 @@ class TWODIGITBRICK(Entry):
             fg=self.textColor,
             bg=self.master['bg'],
             bd=0,
-            justify='right',
+            justify='left',
             validate = 'key',
             relief='flat'
             )
         self.grid(row=self.row, column=self.column)
-        command_key = self.register(self.__Validate), '%d', '%i', '%S', '%V'
+        command_key = self.register(self._Validate), '%d', '%i', '%S', '%V'
         self.config(validatecommand=command_key)
     #########################################################
     #             VALIDA LA ENTRADA DE DIGITOS              #
@@ -59,7 +59,7 @@ class TWODIGITBRICK(Entry):
     #      (all, key, focusin, focusout, forced)
     # %W = el nombre del widget
 
-    def __Validate(self, codigo, indice, caracter, validacionTipo):
+    def _Validate(self, codigo, indice, caracter, validacionTipo):
 
         indx = int(indice)
         if codigo == '1':
@@ -73,6 +73,7 @@ class TWODIGITBRICK(Entry):
         if self.valid:
             self.icursor(indx)
             self.select_range(indx, indx + 1)
+            print(self.get())
         else:
             if validacionTipo != 'forced':
                 self.bell()

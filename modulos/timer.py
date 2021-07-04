@@ -66,11 +66,13 @@ class TIMER(LabelFrame):
     def focusOnMinuts(self, e):
         if e.keycode == 13:
             self.displaySeconds.focus_set()
+            self.displaySeconds.icursor(0)
             self.displaySeconds.select_range(0, 1)
 
     def focusOnSeconds(self, e):
         if e.keycode == 13:
             self.displayMinuts.focus_set()
+            self.displayMinuts.icursor(0)
             self.displayMinuts.select_range(0, 1)
 
     def startStop(self):
