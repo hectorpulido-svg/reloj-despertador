@@ -9,8 +9,8 @@ import distutils
     -- python Mi_setup.py build --
 '''
 
-os.environ['TCL_LIBRARY'] = 'C:\\Program Files\\Python36\\tcl\\tcl8.6'
-os.environ['TK_LIBRARY'] = 'C:\\Program Files\\Python36\\tcl\\tk8.6'
+os.environ['TCL_LIBRARY'] = 'C:\\Python39\\tcl\\tcl8.6'
+os.environ['TK_LIBRARY'] = 'C:\\Python39\\tcl\\tk8.6'
 
 base = None
 if sys.platform == 'win32':
