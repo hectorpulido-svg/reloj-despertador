@@ -17,7 +17,7 @@ if sys.platform == 'win32':
     base = 'Win32GUI'
 
 executables = [
-    Executable('E:\\Python\\reloj-despertador\\main.py', base=base)
+    Executable('E:\\Python\\reloj-despertador\\relojDespertador.py', icon='E:\\Python\\reloj-despertador\\img\\icon\\TimeAlarmclock.ico', base=base)
 ]
 
 setup(name='reloj despertador',
