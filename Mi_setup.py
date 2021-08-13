@@ -17,11 +17,11 @@ if sys.platform == 'win32':
     base = 'Win32GUI'
 
 executables = [
-    Executable('G:\\python\\simples_practicas\\reloj-despertador\\main.py', base=base)
+    Executable('E:\\Python\\reloj-despertador\\main.py', base=base)
 ]
 
 setup(name='reloj despertador',
-      version='0.1',
+      version='1.0',
       options={'build.exe': {'packages': [], 'include_files': [], 'excludes': []}},
       description='simple reloj despertador para windows',
       executables=executables
