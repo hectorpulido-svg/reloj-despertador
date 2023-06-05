@@ -84,7 +84,7 @@ class ALARMCLOCK(Frame):
             el PLAYER usa el nombre del archivo como texto del botón.
         '''
         self.player.mediaPath.set(self.selector.newSelectionPath.get())
-        self.player.newMedia.set(self.player.mediaPath.get())
+        self.player.newMedia_name.set(self.player.mediaPath.get())
         self.selector.currentSelection.set(self.player.mediaName.get().rjust(len(self.player.mediaName.get()) + 8, chr(32)))
         self.selector.updateSelectorLabel()
         try:
