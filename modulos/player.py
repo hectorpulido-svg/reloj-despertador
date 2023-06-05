@@ -5,17 +5,18 @@ from win32com import client
 
 class PLAYER:
     '''
-        PLAYER es una instancia de WINDOWS MEDIA PLAYER COM object
+        WINDOWS MEDIA PLAYER COM OBJECT
     '''
     def __init__(self):
         self.player = client.Dispatch('WMPlayer.OCX')
         # self.player = client.gencache.EnsureDispatch('WMPlayer.OCX')
         self.defaultMedia = StringVar()
-        self.defaultMedia.set('.\\sound\\4PL4Y-Floating.mp3')
         self.mediaPath = StringVar()
         self.mediaName = StringVar()
+        self.newMedia = StringVar()
+        self.defaultMedia.set('.\\sound\\4PL4Y-Floating.mp3')
         self.mediaPath.set(self.defaultMedia.get())
-        self.newMedia(self.mediaPath.get())
+        self.newMedia.set(self.mediaPath.get())
 
     def play(self):
         self.player.controls.play()
@@ -75,7 +76,7 @@ class PLAYER:
             pass
 
 
-        self.newMedia(mediaTest)
+        self.newMedia.set(mediaTest)
         self.player.openPlayer(mediaTest)
 
     def imgURL(self):
