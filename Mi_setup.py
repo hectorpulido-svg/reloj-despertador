@@ -20,8 +20,11 @@ if sys.platform == 'win32':
     base = 'Win32GUI'
 
 executables = [
-    Executable(os.path.join(cwd, 'relojDespertador.py'), icon=os.path.join(cwd, '\\img\\icon\\TimeAlarmclock.ico'), base=base)
+    Executable('C:\\Users\\hemip\\Python\\relojDespertador\\relojDespertador.py', icon='C:\\Users\\hemip\\Python\\relojDespertador\\img\\icon\\TimeAlarmclock.ico', base=base)
 ]
+# executables = [
+#     Executable(os.path.join(cwd, 'relojDespertador.py'), icon=os.path.join(cwd, '\\img\\icon\\TimeAlarmclock.ico'), base=base)
+# ]
 # executables = [
 #     Executable('E:\\Python\\reloj-despertador\\relojDespertador.py', icon='E:\\Python\\reloj-despertador\\img\\icon\\TimeAlarmclock.ico', base=base)
 # ]
