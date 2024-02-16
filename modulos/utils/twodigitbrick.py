@@ -2,7 +2,6 @@
 # =======================================================================
 #
 from tkinter import Tk, Entry, StringVar
-# import winsound
 
 class TWODIGITBRICK(Entry):
     '''
@@ -14,7 +13,7 @@ class TWODIGITBRICK(Entry):
 
         propiedades:
 
-            displayValue: string
+            defaultValue: string
 
         metodos:
 
@@ -29,18 +28,19 @@ class TWODIGITBRICK(Entry):
         self.textColor = textColor
         self.display_font = display_font
         #******************** TWO DIGIT ENTRY *******************
-        self.displayValue = StringVar()
-        self.displayValue.set('00')
+        self.defaultValue = StringVar()
+        self.defaultValue.set('00')
         self.config(
             width=self.width,
             font = (self.display_font['font'], self.display_font['size'], self.display_font['type']),
-            textvariable=self.displayValue,
+            textvariable=self.defaultValue,
             fg=self.textColor,
             bg=self.master['bg'],
             bd=0,
             justify='left',
             validate = 'key',
-            relief='flat'
+            relief='flat',
+            insertwidth = self.width / 2
             )
         self.grid(row=self.row, column=self.column)
         command_key = self.register(self._Validate), '%d', '%i', '%S', '%V'
@@ -62,35 +62,20 @@ class TWODIGITBRICK(Entry):
     def _Validate(self, codigo, indice, caracter, validacionTipo):
 
         indx = int(indice)
-        if codigo == '1':
-            if indx >= 1:
-                indx = 0
-        if int(indice) >= 1:
-            self.index(0)
-
+        if indx >= 1:
+            indx = 0
         self.valid = caracter.isdigit()
-
-        if self.valid:
+        if self.valid and codigo == '1':
             self.icursor(indx)
             self.select_range(indx, indx + 1)
-            print(self.get())
-        else:
-            if validacionTipo != 'forced':
-                self.bell()
-        print(validacionTipo)
+        elif not self.valid and codigo =='1':
+            self.bell()
         return self.valid
                 
     def reset(self):
-        # for i, c in enumerate(self.get()):
-            # self.icursor(0)
-            # self.select_range(0, 1)
         self.delete(0, len(self.get()))
         self.insert(0, '0')
         self.insert(1, '0')
-            # self.delete(1, len(self.get()))
-            # self.index(0)
-        # self.icursor(0)
-        # self.select_range(0, 1)
 
 if __name__ == '__main__':
     from tkinter import Button

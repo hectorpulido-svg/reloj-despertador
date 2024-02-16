@@ -109,16 +109,16 @@ class TIMER(LabelFrame):
         self.displaySeconds.delete(2, len(self.displaySeconds.get()))
         if self.state:
             if int(self.displaySeconds.get()) > 0:
-                self.displaySeconds.displayValue.set(str(int(self.displaySeconds.displayValue.get()) - 1))
+                self.displaySeconds.defaultValue.set(str(int(self.displaySeconds.defaultValue.get()) - 1))
                 if len(self.displaySeconds.get()) <= 1:
-                    self.displaySeconds.displayValue.set('0' + self.displaySeconds.get())
+                    self.displaySeconds.defaultValue.set('0' + self.displaySeconds.get())
             elif int(self.displaySeconds.get()) == 0:
-                self.displaySeconds.displayValue.set('59')
+                self.displaySeconds.defaultValue.set('59')
 
                 if int(self.displayMinuts.get()) > 0:
-                    self.displayMinuts.displayValue.set(str(int(self.displayMinuts.displayValue.get()) - 1))
+                    self.displayMinuts.defaultValue.set(str(int(self.displayMinuts.defaultValue.get()) - 1))
                     if len(self.displayMinuts.get()) <= 1:
-                        self.displayMinuts.displayValue.set('0' + self.displayMinuts.get())
+                        self.displayMinuts.defaultValue.set('0' + self.displayMinuts.get())
 
         if (int(self.displayMinuts.get()) <= 0 and int(self.displaySeconds.get()) <= 0) and self.state:
             self.timeOver()
