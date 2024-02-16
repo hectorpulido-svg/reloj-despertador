@@ -10,8 +10,10 @@ import distutils
     -- python Mi_setup.py build --
 '''
 # C:\Users\hemip\AppData\Local\Programs\Python\Python310
-os.environ['TCL_LIBRARY'] = 'C:\\Users\hemip\\AppData\Local\\Programs\\Python\\Python310\\tcl\\tcl8.6'
-os.environ['TK_LIBRARY'] = 'C:\\Users\hemip\\AppData\Local\\Programs\\Python\\Python310\\tcl\\tk8.6'
+
+# ****** parece que hay error aquí *******
+# os.environ['TCL_LIBRARY'] = 'C:\\Users\hemip\\AppData\Local\\Programs\\Python\\Python310\\tcl\\tcl8.6'
+# os.environ['TK_LIBRARY'] = 'C:\\Users\hemip\\AppData\Local\\Programs\\Python\\Python310\\tcl\\tk8.6'
 
 base = None
 if sys.platform == 'win32':
