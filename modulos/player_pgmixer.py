@@ -12,25 +12,25 @@ class PLAYER:
         self.mediaPath = StringVar()
         self.mediaName = StringVar()
         self.newMedia_name = StringVar()
-        self.media = None
+        self.media = None 
         self.newMedia_name.set(self.defaultMedia.get())
         self.mediaPath.set(self.defaultMedia.get())
+        mixer.music.load(self.mediaPath.get())
 
     def play(self):
-        # if self.mediaPath.get():
         mixer.music.play()
 
     def stop(self):
         mixer.music.stop()
-        self.mediaPath.set(self.defaultMedia.get())
-        mixer.music.load(self.mediaPath.get())
 
     def newMedia(self, media):
         self.media = media
+
         if type(self.media) != type(''):
             self.mediaName.set(self.media.name)
         else:
             self.mediaName.set(self.media.split('/')[-1])
+
         mixer.music.load(self.media)
 
     def reset(self):
