@@ -11,6 +11,7 @@ from tkinter import Tk, PhotoImage, messagebox, StringVar, Frame
 from modulos import SYSTEMCLOCK, ALARM, SYSDATE,CBUTTON, FILESELECTOR, PLAYER
 import os
 import sys
+cwd = os.getcwd()
 
 class ALARMCLOCK(Frame):
 
@@ -84,6 +85,7 @@ class ALARMCLOCK(Frame):
             el PLAYER usa el nombre del archivo como texto del botón.
         '''
         self.player.mediaPath.set(self.selector.newSelectionPath.get())
+        self.player.newMedia(self.selector.newSelectionPath.get())
         self.player.newMedia_name.set(self.player.mediaPath.get())
         self.selector.currentSelection.set(self.player.newMedia_name.get())
         self.selector.updateSelectorLabel()

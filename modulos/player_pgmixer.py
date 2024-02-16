@@ -1,6 +1,7 @@
 from pygame import mixer
 from tkinter import StringVar
 import os
+cwd = os.getcwd()
 
 class PLAYER:
 
@@ -8,30 +9,41 @@ class PLAYER:
 
         mixer.init()
         self.defaultMedia = StringVar()
-        self.defaultMedia.set(os.path.abspath(os.curdir) + '\\sound\\4PLAY-Floating.mp3')
+        self.defaultMedia.set(os.path.join(cwd + os.sep + 'sound' + os.sep, '4PLAY-Floating.mp3'))
+
         self.mediaPath = StringVar()
-        self.mediaName = StringVar()
-        self.newMedia_name = StringVar()
-        self.media = None 
-        self.newMedia_name.set(self.defaultMedia.get())
         self.mediaPath.set(self.defaultMedia.get())
-        mixer.music.load(self.mediaPath.get())
+
+        self.mediaName = StringVar()
+        self.mediaName.set(self.defaultMedia.get())
+
+        self.newMedia_name = StringVar()
+        self.newMedia_name.set(self.defaultMedia.get())
 
     def play(self):
-        mixer.music.play()
+        try:
+            mixer.music.play()
+        except:
+            self.load(self.defaultMedia.get())
+            mixer.music.play()
+
 
     def stop(self):
         mixer.music.stop()
 
-    def newMedia(self, media):
-        self.media = media
-
-        if type(self.media) != type(''):
-            self.mediaName.set(self.media.name)
+    def newMedia(self, media=None):
+        if media is None:
+            media = self.defaultMedia.get()
         else:
-            self.mediaName.set(self.media.split('/')[-1])
+            if type(media) != type(''):
+                self.mediaName.set(media)
+            else:
+                self.mediaName.set(media.split('/')[-1])
 
-        mixer.music.load(self.media)
+        self.load(media)
+
+    def load(self, media):
+        mixer.music.load(media)
 
     def reset(self):
         self.mediaPath.set(self.defaultMedia.get())
