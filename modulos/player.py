@@ -1,7 +1,10 @@
 # -*coding: utf-8 -*-
 
-from tkinter import StringVar
+from tkinter import Button, StringVar
+from numpy import empty
 from win32com import client
+import os
+cwd = os.getcwd()
 
 class PLAYER:
     '''
@@ -11,14 +14,21 @@ class PLAYER:
         self.player = client.Dispatch('WMPlayer.OCX')
         # self.player = client.gencache.EnsureDispatch('WMPlayer.OCX')
         self.defaultMedia = StringVar()
+        self.defaultMedia.set(os.path.join(cwd + os.sep + 'sound' + os.sep, '4PLAY-Floating.mp3'))
+        print(cwd)
         self.mediaPath = StringVar()
+        self.mediaPath.set(self.defaultMedia.get())
+
         self.mediaName = StringVar()
         self.newMedia_name = StringVar()
-        self.defaultMedia.set('.\\sound\\4PL4Y-Floating.mp3')
-        self.mediaPath.set(self.defaultMedia.get())
         self.newMedia_name.set(self.mediaPath.get())
 
     def play(self):
+        if len(self.player.currentPlayList) == 0:
+            self.mediaName.set("")
+            self.player.currentPlaylist.insertItem(0, self.player.newMedia(self.mediaPath.get()))
+            self.mediaName.set(self.player.newMedia(self.mediaPath.get()).getItemInfo('Title'))
+        
         self.player.controls.play()
 
     def status(self):
@@ -87,21 +97,27 @@ if __name__ == '__main__':
     '''
         una muestra del Objeto WMPlayer
     '''
-    from tkinter import Tk
+    from tkinter import Tk, Button
     from slct_file import FILESELECTOR
 
     app = Tk()
     player = PLAYER()
 
+    def play():
+        print(player.mediaPath.get())
+        player.launchWMP(player.mediaPath.get())
+
     def test():
         player.mediaPath.set(selector.newSelectionPath.get())
+        print(player.mediaPath.get())
         player.launchWMP(selector.newSelectionPath.get())
         selector.selectorTitle.set(player.albumArtist())
         selector.currentSelection.set(player.mediaName.get())
         selector.updateSelectorTitle()
         selector.updateSelectorLabel()
 
-    selector = FILESELECTOR(app, 0, 0, 2, 'PRUEBA DE WMPlayer', command=test)
+    btn = Button(app, text="play default", command=play).grid(column=0, row=0)
+    selector = FILESELECTOR(app, 1, 0, 2, 'PRUEBA DE WMPlayer', command=test)
     selector.ledScreenSimulation()
     app.mainloop()
 else:
