@@ -44,8 +44,9 @@ if __name__ == '__main__':
     p = PLAYER()
 
     def load():
-        media = filedialog.askopenfile()
-        p.mediaPath.set(media)
+        media = filedialog.askopenfile("r")
+        p.newMedia(media)
+        # p.mediaPath.set(media)
 
     b_load = Button(w, text='load', command=load).pack()
     b_play = Button(w, text='play', command=p.play).pack()
