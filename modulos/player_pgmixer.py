@@ -11,14 +11,14 @@ class PLAYER:
         self.defaultMedia.set(os.path.abspath(os.curdir) + '\\sound\\4PLAY-Floating.mp3')
         self.mediaPath = StringVar()
         self.mediaName = StringVar()
-        self.newMedia = StringVar()
+        self.newMedia_name = StringVar()
         self.media = None
-        self.newMedia.set(self.defaultMedia.get())
+        self.newMedia_name.set(self.defaultMedia.get())
         self.mediaPath.set(self.defaultMedia.get())
 
     def play(self):
-        if '.mp3' in self.mediaPath.get():
-            mixer.music.play()
+        # if self.mediaPath.get():
+        mixer.music.play()
 
     def stop(self):
         mixer.music.stop()
@@ -35,7 +35,7 @@ class PLAYER:
 
     def reset(self):
         self.mediaPath.set(self.defaultMedia.get())
-        self.newMedia.set(self.mediaPath.get())
+        self.newMedia_name.set(self.mediaPath.get())
 
 
 if __name__ == '__main__':
@@ -45,7 +45,7 @@ if __name__ == '__main__':
 
     def load():
         media = filedialog.askopenfile()
-        p.newMedia.set(media)
+        p.mediaPath.set(media)
 
     b_load = Button(w, text='load', command=load).pack()
     b_play = Button(w, text='play', command=p.play).pack()

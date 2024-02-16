@@ -13,10 +13,10 @@ class PLAYER:
         self.defaultMedia = StringVar()
         self.mediaPath = StringVar()
         self.mediaName = StringVar()
-        self.newMedia = StringVar()
+        self.newMedia_name = StringVar()
         self.defaultMedia.set('.\\sound\\4PL4Y-Floating.mp3')
         self.mediaPath.set(self.defaultMedia.get())
-        self.newMedia.set(self.mediaPath.get())
+        self.newMedia_name.set(self.mediaPath.get())
 
     def play(self):
         self.player.controls.play()
@@ -76,7 +76,7 @@ class PLAYER:
             pass
 
 
-        self.newMedia.set(mediaTest)
+        self.newMedia_name.set(mediaTest)
         self.player.openPlayer(mediaTest)
 
     def imgURL(self):

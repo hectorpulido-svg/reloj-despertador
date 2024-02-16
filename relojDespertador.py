@@ -54,8 +54,8 @@ class ALARMCLOCK(Frame):
                 )
         self.btn_am_pm = CBUTTON(
             self.master, row=2, column=1,
-            Ltext=(lambda x: 'pm' if x == 'am' else 'am')(self.systemclock._meridian.get()),
-            Rtext=(lambda x: 'pm' if x == 'pm' else 'am')(self.systemclock._meridian.get()),
+            Ltext=(lambda x: 'pm' if x == 'am' else 'am')(self.systemclock.meridian.get()),
+            Rtext=(lambda x: 'pm' if x == 'pm' else 'am')(self.systemclock.meridian.get()),
             command=self.alarm.am_pm
             )
         self.selector = FILESELECTOR(
@@ -84,8 +84,8 @@ class ALARMCLOCK(Frame):
             el PLAYER usa el nombre del archivo como texto del botón.
         '''
         self.player.mediaPath.set(self.selector.newSelectionPath.get())
-        self.player.newMedia.set(self.player.mediaPath.get())
-        self.selector.currentSelection.set(self.player.mediaName.get().rjust(len(self.player.mediaName.get()) + 8, chr(32)))
+        self.player.newMedia_name.set(self.player.mediaPath.get())
+        self.selector.currentSelection.set(self.player.newMedia_name.get())
         self.selector.updateSelectorLabel()
         try:
             self.selector.selectorTitle.set(self.player.albumArtist())
@@ -94,9 +94,9 @@ class ALARMCLOCK(Frame):
             pass
 
     def alarmOn(self):
-        if (self.systemclock.currentTime.get() == self.alarm.alarmTime.get()) and (self.systemclock._meridian.get() == self.alarm._meridian.get()):
+        if (self.systemclock.currentTime.get() == self.alarm.alarmTime.get()) and (self.systemclock.meridian.get() == self.alarm.meridian.get()):
             self.time_over = True
-        elif ((self.systemclock.currentTime.get() == '12:00') and (self.systemclock._meridian.get() == 'am')):
+        elif ((self.systemclock.currentTime.get() == '12:00') and (self.systemclock.meridian.get() == 'am')):
             self.sysdate.updateDisplay()
         if not self.time_over:
             self.checker = self.after(1000, self.alarmOn)
