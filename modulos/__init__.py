@@ -1,9 +1,9 @@
 # -*coding: utf-8 -*-
 import os
 from .alarmEntry import ALARM
-# from .systemclock import SYSTEMCLOCK
+from .systemclock import SYSTEMCLOCK
 from .player import PLAYER
-from .player_pgmixer import PLAYER
+# from .player_pgmixer import PLAYER
 from .slct_file import FILESELECTOR
 from .btn import CBUTTON
 from .systemdate import SYSDATE
