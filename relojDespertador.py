@@ -1,5 +1,10 @@
+<<<<<<< HEAD:main.py
+# -*coding: utf-8 -*-
+#!user/bin/env python
+=======
 # -*- coding: utf-8 -*-
 #!user/bin/env python3
+>>>>>>> d3281149ec38ae7a0729dc7a12305626118c1d46:relojDespertador.py
 #------------------------------------------------------
 # Autor: Hector Miguel Pulido Garcia
 # Python 3
@@ -141,7 +146,6 @@ def runapp():
     Despertador.sysdate.ledScreenSimulation()
     Despertador.selector.ledScreenSimulation()
     app.mainloop()
-
 
 if __name__ == '__main__':
     runapp()
