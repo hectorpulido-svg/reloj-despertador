@@ -1,5 +1,5 @@
-#!user/bin/env python
 # -*coding: utf-8 -*-
+#!user/bin/env python
 #------------------------------------------------------
 # Autor: Hector Miguel Pulido Garcia
 # Python 3
@@ -130,7 +130,6 @@ def runapp():
     Despertador.sysdate.ledScreenSimulation()
     Despertador.selector.ledScreenSimulation()
     app.mainloop()
-
 
 if __name__ == '__main__':
     runapp()
