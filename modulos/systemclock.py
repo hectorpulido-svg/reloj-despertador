@@ -26,7 +26,7 @@ class SYSTEMCLOCK(LabelFrame):
 
         propiedades protegidas:
 
-            _meridian: am | pm
+            meridian: am | pm
             currentTime: hora del sistema
 
         metodos:
@@ -71,18 +71,18 @@ class SYSTEMCLOCK(LabelFrame):
         )
         self.__clockDisplay.grid(row=1, column=0, padx=4, pady=4)
         #------------  AM/PM -----------
-        self._meridian = StringVar()
-        self._meridian.set(time.strftime('%p').lower())
-        self.__meridianDisplay = Label(self)
-        self.__meridianDisplay.config(
+        self.meridian = StringVar()
+        self.meridian.set(time.strftime('%p').lower())
+        self._meridianDisplay = Label(self)
+        self._meridianDisplay.config(
             fg=self.textColor,
             bg=self.master['bg'],
-            textvariable=self._meridian,
+            textvariable=self.meridian,
             pady=0,
             padx=0,
             bd=0
         )
-        self.__meridianDisplay.grid(row=0, column=0, sticky='ne')
+        self._meridianDisplay.grid(row=0, column=0, sticky='ne')
         self.hide_show_separator = (lambda x: time.strftime('%I %M') if x % 2 == 0 else time.strftime('%I:%M'))
         self.update()
 
@@ -96,7 +96,7 @@ class SYSTEMCLOCK(LabelFrame):
             (self.hide_show_separator)(self.seconds)
             )
 
-        self._meridian.set(time.strftime('%p').lower())
+        self.meridian.set(time.strftime('%p').lower())
         self.after(1000, self.tictac)
 
     def update(self):
@@ -107,7 +107,7 @@ class SYSTEMCLOCK(LabelFrame):
             font = (self.text_font['font'], self.text_font['size'], self.text_font['type']))
         self.__clockDisplay.config(
             font = (self.display_font['font'], self.display_font['size'], self.display_font['type']), fg = self.textColor)
-        self.__meridianDisplay.config(
+        self._meridianDisplay.config(
             font = (self.text_font['font'], self.text_font['size'], self.text_font['type']))
 
 

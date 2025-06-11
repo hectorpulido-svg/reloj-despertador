@@ -2,8 +2,13 @@
 import os
 from .alarmEntry import ALARM
 from .systemclock import SYSTEMCLOCK
+<<<<<<< HEAD
 # from .player import PLAYER
 from .player_pgmixer import PLAYER
+=======
+from .player import PLAYER
+# from .player_pgmixer import PLAYER
+>>>>>>> d3281149ec38ae7a0729dc7a12305626118c1d46
 from .slct_file import FILESELECTOR
 from .btn import CBUTTON
 from .systemdate import SYSDATE

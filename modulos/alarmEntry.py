@@ -23,7 +23,7 @@ class ALARM(LabelFrame):
 
         propiedades protegidas:
 
-            _meridian: am | pm
+            meridian: am | pm
 
             displayMinust  
             displayMinuts: Estas propiedad son especiales ya que se utilizan para
@@ -81,18 +81,22 @@ class ALARM(LabelFrame):
         ###########################################
         #                AM/PM ALARMA             #
         ###########################################
-        self._meridian = StringVar()
-        self._meridian.set(time.strftime('%p').lower())
-        self.display_meridian = Label(self)
-        self.display_meridian.config(
+        self.meridian = StringVar()
+        self.meridian.set(time.strftime('%p').lower())
+        self.displaymeridian = Label(self)
+        self.displaymeridian.config(
             fg=self.textColor,
             bg=self.master['bg'],
-            textvariable=self._meridian,
+            textvariable=self.meridian,
             pady=0,
             padx=0,
             bd=0
         )
+<<<<<<< HEAD
         self.display_meridian.grid(row=0, column=2, sticky='ne')
+=======
+        self.displaymeridian.grid(row=0, column=2, sticky='ne')
+>>>>>>> d3281149ec38ae7a0729dc7a12305626118c1d46
         self.displayHours.bind('<KeyPress>', self.focusOnHours)
         self.displayMinuts.bind('<KeyPress>', self.focusOnMinuts)
         self.displayHours.bind('<KeyRelease>', self.updateTime)
@@ -113,14 +117,14 @@ class ALARM(LabelFrame):
             self.displayHours.select_range(0, 1)
     
     def am_pm(self):
-        self._meridian.set(self.am_pm_switcher(self._meridian.get()))
-        self.display_meridian.config(textvariable=self._meridian)
+        self.meridian.set(self.am_pm_switcher(self.meridian.get()))
+        self.displaymeridian.config(textvariable=self.meridian)
 
     def update(self):
         self.config(
             font = (self.text_font['font'], self.text_font['size'], self.text_font['type']))
             
-        self.display_meridian.config(
+        self.displaymeridian.config(
             font = (self.text_font['font'], self.text_font['size'], self.text_font['type']))
 
     def reset(self):
