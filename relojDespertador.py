@@ -1,17 +1,22 @@
+<<<<<<< HEAD:main.py
 # -*coding: utf-8 -*-
 #!user/bin/env python
+=======
+# -*- coding: utf-8 -*-
+#!user/bin/env python3
+>>>>>>> d3281149ec38ae7a0729dc7a12305626118c1d46:relojDespertador.py
 #------------------------------------------------------
 # Autor: Hector Miguel Pulido Garcia
 # Python 3
 # Aplicación: Reloj Despertador Version 1.0
-# para windows x64/86 bits usando WINDOWS MEDIA PLAYER
+# para windows o linux x64/86 bits 
+# usando WINDOWS MEDIA PLAYER o PYGAME.MIXER
 #------------------------------------------------------
 from tkinter import Tk, PhotoImage, messagebox, StringVar, Frame
 from modulos import SYSTEMCLOCK, ALARM, SYSDATE,CBUTTON, FILESELECTOR, PLAYER
 import os
 import sys
-
-cd = os.path.sys.path[0]
+cwd = os.getcwd()
 
 class ALARMCLOCK(Frame):
 
@@ -55,8 +60,8 @@ class ALARMCLOCK(Frame):
                 )
         self.btn_am_pm = CBUTTON(
             self.master, row=2, column=1,
-            Ltext=(lambda x: 'pm' if x == 'am' else 'am')(self.systemclock._meridian.get()),
-            Rtext=(lambda x: 'pm' if x == 'pm' else 'am')(self.systemclock._meridian.get()),
+            Ltext=(lambda x: 'pm' if x == 'am' else 'am')(self.systemclock.meridian.get()),
+            Rtext=(lambda x: 'pm' if x == 'pm' else 'am')(self.systemclock.meridian.get()),
             command=self.alarm.am_pm
             )
         self.selector = FILESELECTOR(
@@ -82,28 +87,31 @@ class ALARMCLOCK(Frame):
     def selection(self):
         '''
             envia al PLAYER la dirección del archivo de sonido seleccionado,
-            el PLAYER retorna el nombre del archivo y lo usa como texto del botón.
+            el PLAYER usa el nombre del archivo como texto del botón.
         '''
         self.player.mediaPath.set(self.selector.newSelectionPath.get())
-        self.player.newMedia(self.player.mediaPath.get())
-        self.selector.currentSelection.set(self.player.mediaName.get().rjust(len(self.player.mediaName.get()) + 8, chr(32)))
-        self.selector.selectorTitle.set(self.player.albumArtist())
-        self.selector.updateSelectorTitle()
+        self.player.newMedia(self.selector.newSelectionPath.get())
+        self.player.newMedia_name.set(self.player.mediaPath.get())
+        self.selector.currentSelection.set(self.player.newMedia_name.get())
         self.selector.updateSelectorLabel()
+        try:
+            self.selector.selectorTitle.set(self.player.albumArtist())
+            self.selector.updateSelectorTitle()
+        except:
+            pass
 
     def alarmOn(self):
-        if (self.systemclock.currentTime.get() == self.alarm.alarmTime.get()) and (self.systemclock._meridian.get() == self.alarm._meridian.get()):
+        if (self.systemclock.currentTime.get() == self.alarm.alarmTime.get()) and (self.systemclock.meridian.get() == self.alarm.meridian.get()):
             self.time_over = True
-        elif ((self.systemclock.currentTime.get() == '12:00') and (self.systemclock._meridian.get() == 'am')):
+        elif ((self.systemclock.currentTime.get() == '12:00') and (self.systemclock.meridian.get() == 'am')):
             self.sysdate.updateDisplay()
-
-        self.t1 = self.after(1000, self.alarmOn)
+        if not self.time_over:
+            self.checker = self.after(1000, self.alarmOn)
         self.wakeUp()
         
     def alarmOff(self):
         self.player.stop()
         self.time_over = False
-        self.after_cancel(self.t1)
         self.alarm.reset()
         self.selector.reset()
         self.player.reset()

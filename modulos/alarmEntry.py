@@ -1,5 +1,5 @@
 # -*coding: utf-8 -*-
-from tkinter import LabelFrame, Label, Entry, StringVar
+from tkinter import LabelFrame, Label, StringVar
 import time
 
 
@@ -23,7 +23,7 @@ class ALARM(LabelFrame):
 
         propiedades protegidas:
 
-            _meridian: am | pm
+            meridian: am | pm
 
             displayMinust  
             displayMinuts: Estas propiedad son especiales ya que se utilizan para
@@ -42,7 +42,9 @@ class ALARM(LabelFrame):
 
     '''
 
-    def __init__(self, master, row, column, textColor='white', display_font={}, text_font={}):
+    def __init__(self, master, row=0, column=0, display_font={
+        'font':'SF Digital Readout', 'size':30, 'type':'normal'}, text_font= {
+            'font':'Arial', 'size':10, 'type':'normal'}, textColor='red'):
         super().__init__(master)
         self.master = master
         self.row = row
@@ -79,52 +81,51 @@ class ALARM(LabelFrame):
         ###########################################
         #                AM/PM ALARMA             #
         ###########################################
-        self._meridian = StringVar()
-        self._meridian.set(time.strftime('%p').lower())
-        self.display_meridian = Label(self)
-        self.display_meridian.config(
+        self.meridian = StringVar()
+        self.meridian.set(time.strftime('%p').lower())
+        self.displaymeridian = Label(self)
+        self.displaymeridian.config(
             fg=self.textColor,
             bg=self.master['bg'],
-            textvariable=self._meridian,
+            textvariable=self.meridian,
             pady=0,
             padx=0,
             bd=0
         )
-        self.display_meridian.grid(row=0, column=2, sticky='ne')
-        self.displayHours.bind('<KeyRelease>', self.updateTime)
-        self.displayMinuts.bind('<KeyRelease>', self.updateTime)
+        self.displaymeridian.grid(row=0, column=2, sticky='ne')
         self.displayHours.bind('<KeyPress>', self.focusOnHours)
         self.displayMinuts.bind('<KeyPress>', self.focusOnMinuts)
+        self.displayHours.bind('<KeyRelease>', self.updateTime)
+        self.displayMinuts.bind('<KeyRelease>', self.updateTime)
         self.am_pm_switcher = (lambda x: 'pm' if x=='am' else 'am')
 
     def updateTime(self, e):
         self.alarmTime.set(self.displayHours.get() + ':' + self.displayMinuts.get())
 
     def focusOnHours(self, e):
-        if e.keycode == 13:
+        if e.keysym == 'Return':
             self.displayMinuts.focus_set()
             self.displayMinuts.select_range(0, 1)
 
     def focusOnMinuts(self, e):
-        if e.keycode == 13:
+        if e.keysym == 'Return':
             self.displayHours.focus_set()
             self.displayHours.select_range(0, 1)
     
     def am_pm(self):
-        self._meridian.set(self.am_pm_switcher(self._meridian.get()))
-        self.display_meridian.config(textvariable=self._meridian)
+        self.meridian.set(self.am_pm_switcher(self.meridian.get()))
+        self.displaymeridian.config(textvariable=self.meridian)
 
     def update(self):
         self.config(
             font = (self.text_font['font'], self.text_font['size'], self.text_font['type']))
             
-        self.display_meridian.config(
+        self.displaymeridian.config(
             font = (self.text_font['font'], self.text_font['size'], self.text_font['type']))
 
     def reset(self):
         self.displayHours.reset()
         self.displayMinuts.reset()
-        self.updateTime(None)
         self.displayHours.focus_set()
         self.displayHours.select_range(0, 1)
 
@@ -139,7 +140,7 @@ if __name__ == '__main__':
     from utils.twodigitbrick import TWODIGITBRICK
     app = Tk()
     app.config(bg='black')
-    entry = ALARM(app, row=0, column=0, display_font={'font':'SF Digital Readout', 'size':30, 'type':'normal'}, text_font= {'font':'Arial', 'size':10, 'type':'normal'}, textColor = 'red')
+    entry = ALARM(app)
     entry.displayHours.focus_set()
     entry.displayHours.select_adjust(1)
     app.mainloop()
