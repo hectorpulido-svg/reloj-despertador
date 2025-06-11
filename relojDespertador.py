@@ -5,14 +5,12 @@
 # Python 3
 # Aplicación: Reloj Despertador Version 1.0
 # para windows o linux x64/86 bits 
-# usando WINDOWS MEDIA PLAYER o PYGAME.MIXER_MUSIC
+# usando WINDOWS MEDIA PLAYER o PYGAME.MIXER
 #------------------------------------------------------
 from tkinter import Tk, PhotoImage, messagebox, StringVar, Frame
 from modulos import SYSTEMCLOCK, ALARM, SYSDATE,CBUTTON, FILESELECTOR, PLAYER
 import os
 import sys
-
-# cd = os.path.sys.path[0]
 
 class ALARMCLOCK(Frame):
 
@@ -83,28 +81,30 @@ class ALARMCLOCK(Frame):
     def selection(self):
         '''
             envia al PLAYER la dirección del archivo de sonido seleccionado,
-            el PLAYER retorna el nombre del archivo y lo usa como texto del botón.
+            el PLAYER usa el nombre del archivo como texto del botón.
         '''
         self.player.mediaPath.set(self.selector.newSelectionPath.get())
-        self.player.newMedia(self.player.mediaPath.get())
+        self.player.newMedia.set(self.player.mediaPath.get())
         self.selector.currentSelection.set(self.player.mediaName.get().rjust(len(self.player.mediaName.get()) + 8, chr(32)))
-        self.selector.selectorTitle.set(self.player.albumArtist())
-        self.selector.updateSelectorTitle()
         self.selector.updateSelectorLabel()
+        try:
+            self.selector.selectorTitle.set(self.player.albumArtist())
+            self.selector.updateSelectorTitle()
+        except:
+            pass
 
     def alarmOn(self):
         if (self.systemclock.currentTime.get() == self.alarm.alarmTime.get()) and (self.systemclock._meridian.get() == self.alarm._meridian.get()):
             self.time_over = True
         elif ((self.systemclock.currentTime.get() == '12:00') and (self.systemclock._meridian.get() == 'am')):
             self.sysdate.updateDisplay()
-
-        self.checker = self.after(1000, self.alarmOn)
+        if not self.time_over:
+            self.checker = self.after(1000, self.alarmOn)
         self.wakeUp()
         
     def alarmOff(self):
         self.player.stop()
         self.time_over = False
-        self.after_cancel(self.checker)
         self.alarm.reset()
         self.selector.reset()
         self.player.reset()

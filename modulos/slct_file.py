@@ -92,4 +92,7 @@ else:
     '''
         modulo slct_file.py
     '''
-    from .utils import ledSS
+    try:
+     from utils import ledSS
+    except:
+        from .utils import ledSS
