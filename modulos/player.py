@@ -14,23 +14,12 @@ class PLAYER:
         self.player = client.Dispatch('WMPlayer.OCX')
         # self.player = client.gencache.EnsureDispatch('WMPlayer.OCX')
         self.defaultMedia = StringVar()
-<<<<<<< HEAD
         self.mediaPath = StringVar()
         self.mediaName = StringVar()
         self.newMedia = StringVar()
         self.defaultMedia.set('.\\sound\\4PL4Y-Floating.mp3')
         self.mediaPath.set(self.defaultMedia.get())
         self.newMedia.set(self.mediaPath.get())
-=======
-        self.defaultMedia.set(os.path.join(cwd + os.sep + 'sound' + os.sep, '4PLAY-Floating.mp3'))
-        print(cwd)
-        self.mediaPath = StringVar()
-        self.mediaPath.set(self.defaultMedia.get())
-
-        self.mediaName = StringVar()
-        self.newMedia_name = StringVar()
-        self.newMedia_name.set(self.mediaPath.get())
->>>>>>> d3281149ec38ae7a0729dc7a12305626118c1d46
 
     def play(self):
         if len(self.player.currentPlayList) == 0:
@@ -95,11 +84,7 @@ class PLAYER:
             pass
 
 
-<<<<<<< HEAD
         self.newMedia.set(mediaTest)
-=======
-        self.newMedia_name.set(mediaTest)
->>>>>>> d3281149ec38ae7a0729dc7a12305626118c1d46
         self.player.openPlayer(mediaTest)
 
     def imgURL(self):
