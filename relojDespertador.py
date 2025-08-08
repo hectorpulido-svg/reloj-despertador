@@ -1,10 +1,8 @@
-<<<<<<< HEAD:main.py
 # -*coding: utf-8 -*-
 #!user/bin/env python
-=======
+# =======
 # -*- coding: utf-8 -*-
 #!user/bin/env python3
->>>>>>> d3281149ec38ae7a0729dc7a12305626118c1d46:relojDespertador.py
 #------------------------------------------------------
 # Autor: Hector Miguel Pulido Garcia
 # Python 3
@@ -16,10 +14,8 @@ from tkinter import Tk, PhotoImage, messagebox, StringVar, Frame
 from modulos import SYSTEMCLOCK, ALARM, SYSDATE,CBUTTON, FILESELECTOR, PLAYER
 import os
 import sys
-<<<<<<< HEAD
-=======
+# =======
 cwd = os.getcwd()
->>>>>>> d3281149ec38ae7a0729dc7a12305626118c1d46
 
 class ALARMCLOCK(Frame):
 
@@ -93,14 +89,11 @@ class ALARMCLOCK(Frame):
             el PLAYER usa el nombre del archivo como texto del botón.
         '''
         self.player.mediaPath.set(self.selector.newSelectionPath.get())
-<<<<<<< HEAD
         self.player.newMedia.set(self.player.mediaPath.get())
         self.selector.currentSelection.set(self.player.mediaName.get().rjust(len(self.player.mediaName.get()) + 8, chr(32)))
-=======
         self.player.newMedia(self.selector.newSelectionPath.get())
         self.player.newMedia_name.set(self.player.mediaPath.get())
         self.selector.currentSelection.set(self.player.newMedia_name.get())
->>>>>>> d3281149ec38ae7a0729dc7a12305626118c1d46
         self.selector.updateSelectorLabel()
         try:
             self.selector.selectorTitle.set(self.player.albumArtist())
