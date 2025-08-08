@@ -1,8 +1,5 @@
 # -*coding: utf-8 -*-
 #!user/bin/env python
-# =======
-# -*- coding: utf-8 -*-
-#!user/bin/env python3
 #------------------------------------------------------
 # Autor: Hector Miguel Pulido Garcia
 # Python 3
