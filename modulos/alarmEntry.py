@@ -92,7 +92,7 @@ class ALARM(LabelFrame):
             padx=0,
             bd=0
         )
-        self.display_meridian.grid(row=0, column=2, sticky='ne')
+        self.displaymeridian.grid(row=0, column=2, sticky='ne')
         self.displayHours.bind('<KeyPress>', self.focusOnHours)
         self.displayMinuts.bind('<KeyPress>', self.focusOnMinuts)
         self.displayHours.bind('<KeyRelease>', self.updateTime)
