@@ -11,7 +11,7 @@ from tkinter import Tk, PhotoImage, messagebox, StringVar, Frame
 from modulos import SYSTEMCLOCK, ALARM, SYSDATE,CBUTTON, FILESELECTOR, PLAYER
 import os
 import sys
-
+cwd = os.getcwd()
 
 class ALARMCLOCK(Frame):
 
@@ -87,6 +87,9 @@ class ALARMCLOCK(Frame):
         self.player.mediaPath.set(self.selector.newSelectionPath.get())
         self.player.newMedia.set(self.player.mediaPath.get())
         self.selector.currentSelection.set(self.player.mediaName.get().rjust(len(self.player.mediaName.get()) + 8, chr(32)))
+        self.player.newMedia(self.selector.newSelectionPath.get())
+        self.player.newMedia_name.set(self.player.mediaPath.get())
+        self.selector.currentSelection.set(self.player.newMedia_name.get())
         self.selector.updateSelectorLabel()
         try:
             self.selector.selectorTitle.set(self.player.albumArtist())
