@@ -11,9 +11,7 @@ from tkinter import Tk, PhotoImage, messagebox, StringVar, Frame
 from modulos import SYSTEMCLOCK, ALARM, SYSDATE,CBUTTON, FILESELECTOR, PLAYER
 import os
 import sys
-
 cwd = os.getcwd()
-
 
 class ALARMCLOCK(Frame):
 
